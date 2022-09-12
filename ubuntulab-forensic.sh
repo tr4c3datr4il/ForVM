@@ -1,11 +1,7 @@
 #!/bin/bash
 RED='\033[0;31m'
 GREEN='\033[0;32m'
-
 sudo apt update
-cd ~
-mkdir lab
-cd lab/
 printf ${RED}'Install Volatility 2 and 3\n'${GREEN}
 sudo apt install -y build-essential git libdistorm3-dev yara libraw1394-11 libcapstone-dev capstone-tool tzdata
 sudo apt install -y python2 python2.7-dev libpython2-dev
@@ -23,7 +19,6 @@ echo 'export PATH=/home/ubuntu/.local/bin:$PATH' >> ~/.bashrc
 sudo apt install git 
 git clone https://github.com/superponible/volatility-plugins.git
 sudo cp ~/lab/volatility-plugins/* ~/.local/lib/python2.7/site-packages/volatility/plugins
-
 printf ${RED}'Install Docker\n'${GREEN}
 sudo apt install gnome-terminal
 sudo apt-get update
@@ -36,18 +31,13 @@ echo \
 sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
 docker pull dominicbreuker/stego-toolkit
-
 printf ${RED}'Install Metasploit\n'${GREEN}
 sudo apt install curl
 curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall && chmod 755 msfinstall && ./msfinstall
-
 printf ${RED}'Install Autopsy\n'${GREEN}
 sudo apt install Autopsy
-
 printf ${RED}'Press ENTER to continue\n'${GREEN}
 read a
-
-
 sudo apt update
 sudo apt install neofetch lolcat htop bpytop
 sudo apt upgrade 
