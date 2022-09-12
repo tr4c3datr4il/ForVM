@@ -7,9 +7,9 @@
 - Windows Subsystem for Linux version 2
 - Docker Desktop 
 
-**THOSE SCRIPT IS FOR FIRST TIME AND CLEAN INSTALLATION**
+**THOSE SCRIPTS ARE FOR FRESH AND CLEAN INSTALLATION**
 
-Ref:
+Refs:
 
 https://trendoceans.com/metasploit-framework-on-linux/
 
