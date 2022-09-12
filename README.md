@@ -1,5 +1,12 @@
 # Setup-Linux
 
+### **Minimum Requirements for kali-wsl.sh**
+
+- At least 128GB hard drive
+- At least 8GB RAM
+- Windows Subsystem for Linux version 2
+- Docker Desktop 
+
 **THOSE SCRIPT IS FOR FIRST TIME AND CLEAN INSTALLATION**
 
 Ref:
