@@ -1,7 +1,7 @@
 #!/bin/bash
 RED='\033[0;31m'
 GREEN='\033[0;32m'
-sudo apt update
+sudo apt update -y
 printf ${RED}'Install Volatility 2 and 3\n'${GREEN}
 sudo apt install -y build-essential git libdistorm3-dev yara libraw1394-11 libcapstone-dev capstone-tool tzdata
 sudo apt install -y python2 python2.7-dev libpython2-dev
