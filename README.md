@@ -20,3 +20,5 @@ https://linuxhint.com/sleuth_kit_autopsy/
 https://www.kali.org/docs/wsl/win-kex/#install-win-kex
 
 https://github.com/DominicBreuker/stego-toolkit
+
+https://seanthegeek.net/1172/how-to-install-volatility-2-and-volatility-3-on-debian-ubuntu-or-kali-linux/
