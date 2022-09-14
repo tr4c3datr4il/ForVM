@@ -45,4 +45,3 @@ sudo apt update
 sudo apt install -y neofetch lolcat htop 
 sudo apt install -y bpytop
 sudo apt upgrade 
-
