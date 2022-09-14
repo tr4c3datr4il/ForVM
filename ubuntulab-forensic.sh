@@ -20,7 +20,8 @@ echo 'export PATH=/home/ubuntu/.local/bin:$PATH' >> ~/.bashrc
 sudo apt install -y git 
 git clone https://github.com/superponible/volatility-plugins.git
 sudo cp ~/lab/volatility-plugins/* ~/.local/lib/python2.7/site-packages/volatility/plugins
-read -n 1 -r -s -p "Press any key to continue...\n" key 
+printf ${RED}'Press ENTER to continue\n'${GREEN}
+read a
 printf ${RED}'Install Docker\n'${GREEN}
 sudo apt install gnome-terminal
 sudo apt-get update
@@ -32,13 +33,15 @@ echo \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
-docker pull dominicbreuker/stego-toolkit
-read -n 1 -r -s -p "Press any key to continue...\n" key
+sudo docker pull dominicbreuker/stego-toolkit
+printf ${RED}'Press ENTER to continue\n'${GREEN}
+read a
 printf ${RED}'Install Metasploit\n'${GREEN}
 curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall && chmod 755 msfinstall && ./msfinstall
 printf ${RED}'Install Autopsy\n'${GREEN}
 sudo apt install -y autopsy
-read -n 1 -r -s -p "Press any key to continue...\n" key
+printf ${RED}'Press ENTER to continue\n'${GREEN}
+read a
 sudo apt update
 sudo apt install -y neofetch lolcat htop bpytop
 sudo apt upgrade 
