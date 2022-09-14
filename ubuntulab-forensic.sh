@@ -1,7 +1,7 @@
 #!/bin/bash
 RED='\033[0;31m'
 GREEN='\033[0;32m'
-sudo apt-get update
+sudo apt-get update && sudo apt upgrade
 printf ${RED}'Install Volatility 2 and 3\n'${GREEN}
 sudo apt-get install -y build-essential git libdistorm3-dev yara libraw1394-11 libcapstone-dev capstone-tool tzdata
 sudo apt-get install -y python2 python2.7-dev libpython2-dev
@@ -40,6 +40,18 @@ printf ${RED}'Install Metasploit\n'${GREEN}
 curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall && chmod 755 msfinstall && ./msfinstall
 printf ${RED}'Install Autopsy\n'${GREEN}
 sudo apt install -y autopsy
+printf ${RED}'Install Wireshark and related tools\n'${GREEN}
+sudo apt install wireshark
+printf ${RED}'Please make sure you choose "YES" while installing Wireshark\n'${GREEN}
+read a
+sudo dpkg-reconfigure wireshark-common
+sudo usermod -a -G wireshark ubuntu
+wget https://github.com/odedshimon/BruteShark/releases/latest/download/BruteSharkCli && chmod 777 BruteSharkCli && ./BruteSharkCli --help
+printf ${RED}'Install John the Ripper & Hashcat & Wordlists\n'${GREEN}
+sudo apt-get install john hashcat -y
+git clone https://github.com/danielmiessler/SecLists.git
+wget https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt
+mv rockyou.txt SecLists 
 printf ${RED}'Press ENTER to continue\n'${GREEN}
 read a
 sudo apt update
