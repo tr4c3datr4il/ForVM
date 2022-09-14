@@ -1,11 +1,16 @@
 # Setup-Linux
 
-### **Minimum Requirements for kali-wsl.sh**
+### **Minimum Requirements for KALI-WSL**
 
 - At least 128GB hard drive
 - At least 8GB RAM
 - Windows Subsystem for Linux version 2
 - Docker Desktop 
+
+### **Minimum Requirements for UBUNTU-LAB**
+
+- At least 128GB hard drive
+- At least 4GB RAM
 
 **THOSE SCRIPTS ARE FOR FRESH AND CLEAN INSTALLATION**
 
