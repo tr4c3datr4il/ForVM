@@ -48,6 +48,7 @@ printf ${RED}'Please make sure you choose "YES" while installing Wireshark\n'${G
 read a
 sudo dpkg-reconfigure wireshark-common
 sudo usermod -a -G wireshark ubuntu
+sudo apt install tshark
 wget https://github.com/odedshimon/BruteShark/releases/latest/download/BruteSharkCli && chmod 777 BruteSharkCli && ./BruteSharkCli --help
 printf ${RED}'Install John the Ripper & Hashcat & Wordlists\n'${GREEN}
 sudo apt-get install john hashcat -y
