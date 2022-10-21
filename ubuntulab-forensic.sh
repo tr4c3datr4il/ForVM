@@ -21,7 +21,7 @@ python3 -m pip install -U git+https://github.com/volatilityfoundation/volatility
 echo 'export PATH=/home/ubuntu/.local/bin:$PATH' >> ~/.bashrc
 sudo apt install -y git 
 git clone https://github.com/superponible/volatility-plugins.git
-sudo cp ~/lab/volatility-plugins/* ~/.local/lib/python2.7/site-packages/volatility/plugins
+sudo cp ~/lab/volatility-plugins/* ~/.local/lib/python2.7/site-packages/volatility/plugins/
 printf ${RED}'Press ENTER to continue\n'${GREEN}
 read a
 printf ${RED}'Install Docker\n'${GREEN}
@@ -66,8 +66,8 @@ mkdir -p ~/src
     ./john --test=0    
     ./john --test
 git clone https://github.com/danielmiessler/SecLists.git
-wget https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt
-mv rockyou.txt SecLists 
+git clone https://github.com/3ndG4me/KaliLists.git
+cd kaliLists/ gunzip rockyou.txt.gz cd  
 printf ${RED}'Press ENTER to continue\n'${GREEN}
 read a
 sudo apt update
