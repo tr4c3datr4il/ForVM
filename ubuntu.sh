@@ -6,7 +6,7 @@ sudo apt-get update && sudo apt upgrade
 mkdir ~/lab
 cd ~/lab
 printf ${RED}'Install Volatility 2 and 3\n'${GREEN}
-
+sudo apt install curl -y
 sudo apt-get install -y build-essential git libdistorm3-dev yara libraw1394-11 libcapstone-dev capstone-tool tzdata
 sudo apt-get install -y python2 python2.7-dev libpython2-dev
 curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py
