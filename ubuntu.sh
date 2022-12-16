@@ -64,7 +64,7 @@ sudo apt-get install hashcat -y
 sudo apt install john -y
 git clone https://github.com/danielmiessler/SecLists.git
 git clone https://github.com/3ndG4me/KaliLists.git
-cd kaliLists/ gunzip rockyou.txt.gz cd  
+cd kaliLists/; gunzip rockyou.txt.gz cd  
 
 printf ${RED}'Press ENTER to continue\n'${GREEN}
 read a
