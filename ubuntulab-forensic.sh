@@ -52,19 +52,7 @@ sudo apt install tshark
 wget https://github.com/odedshimon/BruteShark/releases/latest/download/BruteSharkCli && chmod 777 BruteSharkCli && ./BruteSharkCli --help
 printf ${RED}'Install John the Ripper & Hashcat & Wordlists\n'${GREEN}
 sudo apt-get install hashcat -y
-cd 
-mkdir -p ~/src
-    sudo apt-get -y install git build-essential libssl-dev zlib1g-dev
-    sudo apt-get -y install yasm pkg-config libgmp-dev libpcap-dev libbz2-dev
-    sudo apt-get -y install nvidia-opencl-dev
-    sudo apt-get -y install ocl-icd-opencl-dev opencl-headers
- cd ~/src
-    git clone https://github.com/openwall/john -b bleeding-jumbo john
- cd ~/src/john/src
-    ./configure && make -s clean && make -sj4
-    cd ~/src/john/run
-    ./john --test=0    
-    ./john --test
+sudo apt install john -y
 git clone https://github.com/danielmiessler/SecLists.git
 git clone https://github.com/3ndG4me/KaliLists.git
 cd kaliLists/ gunzip rockyou.txt.gz cd  
