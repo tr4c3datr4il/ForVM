@@ -20,7 +20,7 @@ sudo apt install -y python3 python3-dev libpython3-dev python3-pip python3-setup
 sudo apt install -y python3-wheel
 python3 -m pip install -U distorm3 yara pycrypto pillow openpyxl ujson pytz ipython capstone
 python3 -m pip install -U git+https://github.com/volatilityfoundation/volatility3.git
-echo "export PATH=/home/$(whoami)/.local/bin:$PATH" >> ~/.bashrc
+echo "export PATH=/home/$USER/.local/bin:$PATH" >> ~/.bashrc
 sudo apt install -y git 
 git clone https://github.com/superponible/volatility-plugins.git
 sudo cp ~/lab/volatility-plugins/* ~/.local/lib/python2.7/site-packages/volatility/plugins/
