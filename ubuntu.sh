@@ -72,3 +72,6 @@ read a
 sudo apt update
 sudo apt install -y neofetch lolcat htop bpytop bison flex
 sudo apt upgrade 
+printf ${RED}'Do you want to reboot the system? If not, please do it manually to make sure everything is working fine!\n'${GREEN}
+read a
+sudo reboot -f
