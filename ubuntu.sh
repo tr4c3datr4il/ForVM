@@ -69,5 +69,5 @@ cd KaliLists/; gunzip rockyou.txt.gz cd
 printf ${RED}'Press ENTER to continue\n'${GREEN}
 read a
 sudo apt update
-sudo apt install -y neofetch lolcat htop bpytop
+sudo apt install -y neofetch lolcat htop bpytop bison flex
 sudo apt upgrade 
