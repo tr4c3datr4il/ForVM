@@ -65,7 +65,8 @@ sudo apt install john -y
 git clone https://github.com/danielmiessler/SecLists.git
 git clone https://github.com/3ndG4me/KaliLists.git
 cd KaliLists/ 
-gunzip rockyou.txt.gz; cd  
+gunzip rockyou.txt.gz 
+cd ~ 
 
 printf ${RED}'Press ENTER to continue\n'${GREEN}
 read a
