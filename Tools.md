@@ -16,4 +16,4 @@
 
 
 
-- olevba, exiftool, john, hashcat, docker, peepdf, binwalk
+- olevba, exiftool, john, hashcat, docker, peepdf, binwalk, holehe
