@@ -13,7 +13,7 @@
 - PCRT
 - Audacity
 - Registry Viewer
+- dnSpy
 
 
-
-- olevba, exiftool, john, hashcat, docker, peepdf, binwalk, holehe
+- olevba, exiftool, john, hashcat, docker, peepdf, binwalk, holehe, fakenet-ng
