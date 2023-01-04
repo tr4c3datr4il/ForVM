@@ -5,7 +5,8 @@ sudo apt-get update && sudo apt upgrade -y
 
 mkdir ~/lab
 cd ~/lab
-printf ${RED}'Install Volatility 2 and 3\n'${CYAN}
+
+printf ${RED}'Installing Volatility 2 and 3\n'${CYAN}
 sudo apt install curl -y
 sudo apt-get install -y build-essential git libdistorm3-dev yara libraw1394-11 libcapstone-dev capstone-tool tzdata
 sudo apt-get install -y python2 python2.7-dev libpython2-dev
@@ -27,7 +28,7 @@ sudo cp ~/lab/volatility-plugins/* ~/.local/lib/python2.7/site-packages/volatili
 
 printf ${RED}'Press ENTER to continue\n'${CYAN}
 read a
-printf ${RED}'Install Docker\n'${CYAN}
+printf ${RED}'Installing Docker\n'${CYAN}
 sudo apt install gnome-terminal -y
 sudo apt-get update
 sudo apt-get install ca-certificates curl gnupg lsb-release -y
@@ -42,9 +43,6 @@ sudo docker pull dominicbreuker/stego-toolkit
 
 printf ${RED}'Press ENTER to continue\n'${CYAN}
 read a
-
-printf ${RED}'Install Metasploit\n'${CYAN}
-curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall && chmod 755 msfinstall && ./msfinstall
 
 printf ${RED}'Install Autopsy\n'${CYAN}
 sudo apt install -y autopsy
