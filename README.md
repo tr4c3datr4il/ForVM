@@ -1,10 +1,11 @@
-# Setup Forensics Environment for Ubuntu VM and Kali WSL
+# Setup Forensics Environment for Ubuntu VM and WSL
 
-### **Minimum Requirements for KALI-WSL**
+### **Minimum Requirements for UBUNTU-WSL**
 
 - At least 60GB hard drive
 - At least 8GB RAM
 - Windows Subsystem for Linux version 2
+- Ubuntu Distro
 - Docker Desktop 
 
 ### **Minimum Requirements for UBUNTU-VM**
