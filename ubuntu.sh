@@ -55,7 +55,6 @@ read a
 sudo dpkg-reconfigure wireshark-common
 sudo usermod -a -G wireshark ubuntu
 sudo apt install tshark -y
-wget https://github.com/odedshimon/BruteShark/releases/latest/download/BruteSharkCli && chmod 777 BruteSharkCli && ./BruteSharkCli --help
 
 printf ${RED}'Install John the Ripper & Hashcat & Wordlists\n'${CYAN}
 sudo apt-get install hashcat -y
@@ -72,5 +71,9 @@ sudo apt update
 sudo apt install -y neofetch lolcat htop bpytop bison flex dwarfdump
 sudo apt upgrade 
 printf ${RED}'Do you want to reboot the system? If not, please do it manually to make sure everything is working fine!\n'${CYAN}
-read a
-sudo reboot -f
+read input
+if [[ $input == "Y" || $input == "y" ]]; then
+        sudo reboot -f
+else
+        echo "Please reboot asap ^_^"
+fi
