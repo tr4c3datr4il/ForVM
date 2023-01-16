@@ -19,7 +19,7 @@ sudo ln -s /usr/local/lib/python2.7/dist-packages/usr/lib/libyara.so /usr/lib/li
 python2 -m pip install -U git+https://github.com/volatilityfoundation/volatility.git
 sudo apt install -y python3 python3-dev libpython3-dev python3-pip python3-setuptools 
 sudo apt install -y python3-wheel
-python3 -m pip install -U distorm3 yara pycrypto pillow openpyxl ujson pytz ipython capstone
+python3 -m pip install -U distorm3 pillow openpyxl ujson pytz ipython capstone pefile yara-python pycryptodome jsonschema leechcorepyc python-snappy
 python3 -m pip install -U git+https://github.com/volatilityfoundation/volatility3.git
 export PATH=/home/$USER/.local/bin:$PATH
 sudo apt install -y git 
