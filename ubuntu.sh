@@ -65,14 +65,17 @@ cd KaliLists/
 gunzip rockyou.txt.gz 
 cd ~ 
 
-printf ${RED}'Install Stego things\n'${CYAN}
+printf ${RED}'Install Stego and OSINT things\n'${CYAN}
 sudo apt install exiftool -y
-
+pip3 install pipx
+pipx ensurepath
+sudo apt install python3.10-venv -y
+pipx install ghunt
 printf ${RED}'Press ENTER to continue\n'${CYAN}
 read a
-sudo apt update
+sudo apt update -y
 sudo apt install -y neofetch lolcat htop bpytop bison flex dwarfdump
-sudo apt upgrade 
+sudo apt upgrade -y 
 printf ${RED}'Do you want to reboot the system? If not, please do it manually to make sure everything is working fine!\n'${CYAN}
 read input
 if [[ $input == "Y" || $input == "y" ]]; then
