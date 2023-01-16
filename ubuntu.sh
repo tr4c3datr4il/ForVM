@@ -66,7 +66,18 @@ gunzip rockyou.txt.gz
 cd ~ 
 
 printf ${RED}'Install Stego and OSINT things\n'${CYAN}
+cd ~/lab
 sudo apt install exiftool -y
+sudo gem install zsteg
+wget https://github.com/RickdeJager/stegseek/releases/download/v0.6/stegseek_0.6-1.deb
+chmod 777 ./stegseek_0.6-1.deb
+sudo apt install ./stegseek_0.6-1.deb -y
+sudo apt install default-jre
+wget http://www.caesum.com/handbook/Stegsolve.jar -O stegsolve.jar
+chmod +x stegsolve.jar
+git clone https://github.com/p1ngul1n0/blackbird
+cd blackbird
+pip install -r requirements.txt
 pip3 install pipx
 pipx ensurepath
 sudo apt install python3.10-venv -y
