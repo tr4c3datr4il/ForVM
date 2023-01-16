@@ -47,8 +47,8 @@ read a
 printf ${RED}'Install Autopsy\n'${CYAN}
 sudo apt install -y autopsy
 
-printf ${RED}'Install Wireshark and related tools\n'${CYAN}
-sudo apt install wireshark
+printf ${RED}'Install Wireshark\n'${CYAN}
+sudo apt install wireshark -y
 
 printf ${RED}'Please make sure you choose "YES" while installing Wireshark\n'${CYAN}
 read a
@@ -64,6 +64,9 @@ git clone https://github.com/3ndG4me/KaliLists.git
 cd KaliLists/ 
 gunzip rockyou.txt.gz 
 cd ~ 
+
+printf ${RED}'Install Stego things\n'${CYAN}
+sudo apt install exiftool -y
 
 printf ${RED}'Press ENTER to continue\n'${CYAN}
 read a
