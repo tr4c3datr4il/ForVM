@@ -65,7 +65,7 @@ cd KaliLists/
 gunzip rockyou.txt.gz 
 cd ~ 
 
-printf ${RED}'Press ENTER to continue\n'${CYAN}
+printf ${RED}'Install Stego and OSINT tools\n'${CYAN}
 read a
 cd ~/lab
 sudo apt install exiftool -y
