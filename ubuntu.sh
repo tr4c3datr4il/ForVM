@@ -65,7 +65,8 @@ cd KaliLists/
 gunzip rockyou.txt.gz 
 cd ~ 
 
-printf ${RED}'Install Stego and OSINT things\n'${CYAN}
+printf ${RED}'Press ENTER to continue\n'${CYAN}
+read a
 cd ~/lab
 sudo apt install exiftool -y
 sudo gem install zsteg
@@ -82,6 +83,12 @@ pip3 install pipx
 pipx ensurepath
 sudo apt install python3.10-venv -y
 pipx install ghunt
+printf ${RED}'Press ENTER to continue\n'${CYAN}
+read a
+
+printf ${RED}'Install oletools\n'${CYAN}
+sudo -H pip3 install -U oletools[full]
+
 printf ${RED}'Press ENTER to continue\n'${CYAN}
 read a
 sudo apt update -y
