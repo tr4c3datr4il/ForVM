@@ -102,3 +102,4 @@ if [[ $input == "Y" || $input == "y" ]]; then
 else
         echo "Please reboot asap ^_^"
 fi
+#2>&1 | tee install_log.txt
