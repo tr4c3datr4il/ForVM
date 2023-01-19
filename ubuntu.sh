@@ -79,7 +79,7 @@ wget http://www.caesum.com/handbook/Stegsolve.jar -O stegsolve.jar
 chmod +x stegsolve.jar
 git clone https://github.com/p1ngul1n0/blackbird
 cd blackbird
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 pip3 install pipx
 pipx ensurepath
 sudo apt install python3.10-venv -y
