@@ -40,6 +40,7 @@ echo \
 sudo apt-get update -y
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
 sudo docker pull dominicbreuker/stego-toolkit
+sudo usermod -aG docker $USER
 
 printf ${RED}'Press ENTER to continue\n'${CYAN}
 read a
