@@ -93,7 +93,7 @@ sudo -H pip3 install -U oletools[full]
 printf ${RED}'Press ENTER to continue\n'${CYAN}
 read a
 sudo apt update -y
-sudo apt install -y neofetch lolcat htop bpytop bison flex dwarfdump
+sudo apt install -y neofetch lolcat htop bpytop bison flex dwarfdump openssh-server
 sudo apt upgrade -y 
 printf ${RED}'Do you want to reboot the system? If not, please do it manually to make sure everything is working fine!\n'${CYAN}
 read input
