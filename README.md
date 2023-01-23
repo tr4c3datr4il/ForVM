@@ -17,13 +17,10 @@
 
 Refs:
 
-https://trendoceans.com/metasploit-framework-on-linux/
 
 https://github.com/superponible/volatility-plugins
 
 https://linuxhint.com/sleuth_kit_autopsy/
-
-https://www.kali.org/docs/wsl/win-kex/#install-win-kex
 
 https://github.com/DominicBreuker/stego-toolkit
 
