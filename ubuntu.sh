@@ -48,7 +48,7 @@ read a
 printf ${RED}'Install Autopsy\n'${CYAN}
 sudo apt install -y autopsy
 
-printf ${RED}'Install Wireshark\n'${CYAN}
+printf ${RED}'Install Wireshark and Fakenet\n'${CYAN}
 sudo apt install wireshark -y
 
 printf ${RED}'Please make sure you choose "YES" while installing Wireshark\n'${CYAN}
@@ -56,7 +56,7 @@ read a
 sudo dpkg-reconfigure wireshark-common
 sudo usermod -a -G wireshark ubuntu
 sudo apt install tshark -y
-
+sudo wget https://github.com/mandiant/flare-fakenet-ng/releases/download/v1.4.11/fakenet1.4.11.zip
 printf ${RED}'Install John the Ripper & Hashcat & Wordlists\n'${CYAN}
 sudo apt-get install hashcat -y
 sudo apt install john -y
