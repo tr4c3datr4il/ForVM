@@ -69,7 +69,7 @@ cd ~
 printf ${RED}'Install Stego and OSINT tools\n'${CYAN}
 read a
 cd ~/lab
-sudo apt install exiftool -y
+sudo apt install exiftool steghide -y
 sudo gem install zsteg
 wget https://github.com/RickdeJager/stegseek/releases/download/v0.6/stegseek_0.6-1.deb
 chmod 777 ./stegseek_0.6-1.deb
@@ -93,7 +93,7 @@ sudo -H pip3 install -U oletools[full]
 printf ${RED}'Press ENTER to continue\n'${CYAN}
 read a
 sudo apt update -y
-sudo apt install -y neofetch lolcat htop bpytop bison flex dwarfdump openssh-server net-tools openvpn
+sudo apt install -y neofetch lolcat htop bpytop bison flex dwarfdump openssh-server net-tools openvpn dos2unix
 sudo apt upgrade -y 
 printf ${RED}'Do you want to reboot the system? If not, please do it manually to make sure everything is working fine!\n'${CYAN}
 read input
