@@ -25,7 +25,7 @@ export PATH=/home/$USER/.local/bin:$PATH
 sudo apt install -y git 
 git clone https://github.com/superponible/volatility-plugins.git
 sudo cp ~/lab/volatility-plugins/* ~/.local/lib/python2.7/site-packages/volatility/plugins/
-
+git clone https://github.com/volatilityfoundation/volatility.git
 printf ${RED}'Press ENTER to continue\n'${CYAN}
 read a
 printf ${RED}'Installing Docker\n'${CYAN}
