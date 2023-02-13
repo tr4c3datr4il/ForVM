@@ -64,7 +64,7 @@ git clone https://github.com/3ndG4me/KaliLists.git
 cd KaliLists/ 
 gunzip rockyou.txt.gz 
 cd ~ 
-
+echo "alias 'wordlists'='echo ~/lab/KaliList ~/lab/SecLists'" >> ~/.zshrc
 echo -e ${RED}'Install Stego and OSINT tools\n'${CYAN}
 cd ~/lab
 sudo apt install exiftool steghide -y
