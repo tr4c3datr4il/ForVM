@@ -90,7 +90,12 @@ read a
 
 echo -e ${RED}'Install oletools\n'${CYAN}
 sudo -H pip3 install -U oletools[full]
-
+cd ~/lab
+git clone https://github.com/jesparza/peepdf.git
+cd peepdf
+sed -i '1i#!/usr/bin/python2.7' peepdf.py
+sudo cp -r * /usr/bin/
+cd
 echo -e ${RED}'Press ENTER to continue\n'${CYAN}
 read a
 sudo apt update -y
