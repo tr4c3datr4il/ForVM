@@ -65,6 +65,7 @@ cd KaliLists/
 gunzip rockyou.txt.gz 
 cd ~ 
 echo "alias 'wordlists'='echo ~/lab/KaliList ~/lab/SecLists'" >> ~/.zshrc
+
 echo -e ${RED}'Install Stego and OSINT tools\n'${CYAN}
 cd ~/lab
 sudo apt install exiftool steghide -y
@@ -82,6 +83,8 @@ pip3 install pipx
 pipx ensurepath
 sudo apt install python3.10-venv -y
 pipx install ghunt
+sed -i '1i#!/usr/bin/python3' ~/lab/blackbird/blackbird.py
+sudo cp ~/lab/blackbird/blackbird.py /usr/bin/blackbird.py
 echo -e ${RED}'Press ENTER to continue\n'${CYAN}
 read a
 
