@@ -12,9 +12,7 @@ echo -e ${RED}'Installing Volatility 2 and 3\n'${CYAN}
         curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py
         sudo python2 get-pip.py
         sudo python2 -m pip install -U setuptools wheel
-        python2 -m pip install -U distorm3 yara pycrypto pillow openpyxl ujson pytz ipython capstone
-        python2 -m pip install yara
-        pip2 install construct==2.5.5-reupload
+        python2 -m pip install -U distorm3 yara pycrypto pillow openpyxl ujson pytz ipython capstone construct==2.5.5-reupload
         sudo ln -s /usr/local/lib/python2.7/dist-packages/usr/lib/libyara.so /usr/lib/libyara.so
         python2 -m pip install -U git+https://github.com/volatilityfoundation/volatility.git
 
