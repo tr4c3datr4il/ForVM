@@ -31,7 +31,7 @@
 + Last, run the `.sh` file:
     ```
     ./ubuntu.sh //if you are in ubuntu virtual machine or actual os
-    ./ubuntu-wsl //if you are using WSL on Windows
+    ./ubuntu-wsl.sh //if you are using WSL on Windows
     ```
 Refs:
 
