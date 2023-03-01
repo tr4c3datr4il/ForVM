@@ -53,8 +53,8 @@ echo -e ${RED}'Install Stego and OSINT tools\n'${CYAN}
     chmod +x stegsolve.jar
     git clone https://github.com/p1ngul1n0/blackbird
     cd blackbird
-    pip3 install -r requirements.txt
-    pip3 install pipx
+    python3 -m pip install -r requirements.txt
+    python3 -m pip install pipx
     pipx ensurepath
     sudo apt install python3.10-venv -y
     pipx install ghunt
