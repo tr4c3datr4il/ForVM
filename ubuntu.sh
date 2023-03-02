@@ -100,7 +100,7 @@ echo -e ${RED}'Install oletools\n'${CYAN}
 echo -e ${RED}'Press ENTER to continue\n'${CYAN}
 read a
         sudo apt update -y
-        sudo apt install -y neofetch lolcat batcat nala htop bpytop bison flex dwarfdump openssh-server net-tools openvpn dos2unix
+        sudo apt install -y neofetch lolcat batcat nala htop bpytop bison flex dwarfdump openssh-server net-tools openvpn dos2unix ewf-tools
         sudo apt upgrade -y 
         echo -e ${RED}'Do you want to reboot the system? If not, please do it manually to make sure everything is working fine!\n'${CYAN}
         read input
