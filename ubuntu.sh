@@ -55,8 +55,13 @@ function main{
                 sudo dpkg-reconfigure wireshark-common
                 sudo usermod -a -G wireshark ubuntu
                 sudo apt install tshark -y
-                wget https://github.com/mandiant/flare-fakenet-ng/releases/download/v1.4.11/fakenet1.4.11.zip
-
+                git clone https://github.com/mandiant/flare-fakenet-ng.git
+                sudo apt install build-essential python2-dev libnetfilter-queue-dev
+                python2 -m pip install requests
+                sudo python2 -m pip install https://github.com/mandiant/flare-fakenet-ng/zipball/master
+                cd flare-fakenet-ng
+                sudo python2.7 setup.py install
+                
         echo -e ${RED}'Install John the Ripper & Hashcat & Wordlists\n'${CYAN}
                 sudo apt install hashcat snapd -y
                 sudo snap install john-the-ripper
