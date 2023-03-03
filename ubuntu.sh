@@ -4,7 +4,7 @@ CYAN='\033[0;36m'
 
 function main{
         sudo apt update && sudo apt upgrade -y
-        shellrc="~/."$(echo $SHELL | awk -F '/' '{print $4}\')"rc"
+        shellrc="~/."$(echo $SHELL | awk -F '/' '{print $NF}\')"rc"
         mkdir ~/lab
         cd ~/lab
 
