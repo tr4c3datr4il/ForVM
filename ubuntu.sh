@@ -65,7 +65,7 @@ function main{
                 cd KaliLists/ 
                 gunzip rockyou.txt.gz 
                 cd ~ 
-                echo "alias 'wordlists'='echo ~/lab/KaliLists ~/lab/SecLists'" >> ~/.zshrc
+                echo "alias 'wordlists'='echo ~/lab/KaliLists ~/lab/SecLists'" >> $shellrc
 
         echo -e ${RED}'Install Stego and OSINT tools\n'${CYAN}
                 cd ~/lab
