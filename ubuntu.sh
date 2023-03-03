@@ -91,7 +91,7 @@ function main{
                 cd trid && wget https://mark0.net/download/tridupdate.zip && unzip tridupdate.zip
                 python3 triupdate.py
                 sudo cp trid /usr/bin/trid && chmod +x /usr/bin/trid
-                echo "echo "LANG=/usr/lib/locale/en_US" | $(echo $SHELL | awk -F '/' '{print $4}\')" | $shellrc
+                echo "echo "LANG=/usr/lib/locale/en_US" | $(echo $SHELL | awk -F '/' '{print $4}\')" >> $shellrc
 
         echo -e ${RED}'Press ENTER to continue\n'${CYAN}
         read a
