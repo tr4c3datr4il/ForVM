@@ -43,7 +43,7 @@
 - bpytop
 - openvpn
 - dos2unix
-
+- SSH service
 
 
 
