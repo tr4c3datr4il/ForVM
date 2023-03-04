@@ -8,7 +8,7 @@ shellrc="$HOME/.$(echo $SHELL | awk -F '/' '{print $NF}')"rc
 mkdir ~/lab
 cd ~/lab
 
-echo -e ${RED}'Installing Volatility 2 and 3\n'${CYAN}
+echo -e ${RED}'Installing Volatility 2 and 3'${CYAN}
         sudo apt-get install -y curl build-essential git libdistorm3-dev yara libraw1394-11 libcapstone-dev capstone-tool tzdata
         sudo apt-get install -y python2 python2.7-dev libpython2-dev
         curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py
@@ -26,9 +26,9 @@ echo -e ${RED}'Installing Volatility 2 and 3\n'${CYAN}
         sudo cp ~/lab/volatility-plugins/* ~/.local/lib/python2.7/site-packages/volatility/plugins/
         git clone https://github.com/volatilityfoundation/volatility.git
 
-echo -e ${RED}'Press ENTER to continue\n'${CYAN}
+echo -e ${RED}'Press ENTER to continue'${CYAN}
 read a
-echo -e ${RED}'Installing Docker\n'${CYAN}
+echo -e ${RED}'Installing Docker'${CYAN}
         sudo apt-get install gnome-terminal -y
         sudo apt-get update
         sudo apt-get install ca-certificates gnupg lsb-release -y
@@ -42,13 +42,13 @@ echo -e ${RED}'Installing Docker\n'${CYAN}
         sudo docker pull dominicbreuker/stego-toolkit
         sudo usermod -aG docker $USER
 
-echo -e ${RED}'Press ENTER to continue\n'${CYAN}
+echo -e ${RED}'Press ENTER to continue'${CYAN}
 read a
 
-echo -e ${RED}'Install Autopsy\n'${CYAN}
+echo -e ${RED}'Install Autopsy'${CYAN}
         sudo apt-get install -y autopsy
 
-echo -e ${RED}'Install Wireshark and Fakenet\n'${CYAN}
+echo -e ${RED}'Install Wireshark and Fakenet'${CYAN}
         echo "wireshark-common wireshark-common/install-setuid boolean true" | sudo debconf-set-selections
         sudo DEBIAN_FRONTEND=noninteractive apt-get -y install wireshark
         sudo usermod -a -G wireshark ubuntu
@@ -60,7 +60,7 @@ echo -e ${RED}'Install Wireshark and Fakenet\n'${CYAN}
         cd flare-fakenet-ng
         sudo python2.7 setup.py install
         
-echo -e ${RED}'Install John the Ripper & Hashcat & Wordlists\n'${CYAN}
+echo -e ${RED}'Install John the Ripper & Hashcat & Wordlists'${CYAN}
         sudo apt-get install hashcat snapd -y
         sudo snap install john-the-ripper
         git clone https://github.com/danielmiessler/SecLists.git
@@ -70,7 +70,7 @@ echo -e ${RED}'Install John the Ripper & Hashcat & Wordlists\n'${CYAN}
         cd ~ 
         echo "alias 'wordlists'='echo ~/lab/KaliLists ~/lab/SecLists'" >> $shellrc
 
-echo -e ${RED}'Install Stego and OSINT tools\n'${CYAN}
+echo -e ${RED}'Install Stego and OSINT tools'${CYAN}
         cd ~/lab
         sudo apt-get install exiftool steghide -y
         sudo gem install zsteg
@@ -96,10 +96,10 @@ echo -e ${RED}'Install Stego and OSINT tools\n'${CYAN}
         sudo cp trid /usr/bin/trid && sudo chmod +x /usr/bin/trid
         echo "echo "LANG=/usr/lib/locale/en_US" | $(echo $SHELL | awk -F '/' '{print $4}\')" >> $shellrc
 
-echo -e ${RED}'Press ENTER to continue\n'${CYAN}
+echo -e ${RED}'Press ENTER to continue'${CYAN}
 read a
 
-echo -e ${RED}'Install oletools\n'${CYAN}
+echo -e ${RED}'Install oletools'${CYAN}
         sudo -H python3 -m pip install -U oletools[full]
         cd ~/lab
         git clone https://github.com/jesparza/peepdf.git
@@ -108,12 +108,12 @@ echo -e ${RED}'Install oletools\n'${CYAN}
         sudo cp -r * /usr/bin/
         cd
 
-echo -e ${RED}'Press ENTER to continue\n'${CYAN}
+echo -e ${RED}'Press ENTER to continue'${CYAN}
 read a
         sudo apt-get update
         sudo apt-get install -y neofetch lolcat batcat nala htop bpytop bison flex dwarfdump openssh-server net-tools openvpn dos2unix ewf-tools
         sudo apt-get upgrade -y 
-        echo -e ${RED}'Do you want to reboot the system? If not, please do it manually to make sure everything is working fine!\n'${CYAN}
+        echo -e ${RED}'Do you want to reboot the system? If not, please do it manually to make sure everything is working fine!'${CYAN}
         read input
 until [[ $input == "Y" || $input == "y" || $input == "N" || $input == "n" ]];
 do
