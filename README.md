@@ -19,20 +19,35 @@
 ### **How to setup:**
 
 + First, clone this repository to your local lab
+    
     ```sh
     git clone https://github.com/1259iknowthat/Setup-Linux.git
     ```
+
 + Second, change dir to the repo and change the permission of all `.sh` files (or just one depend on your decision).
+    
     ```sh
     cd Setup-Linux
     chmod +x ubuntu.sh
     chmod +x ubuntu-wsl.sh
     ```
+
 + Last, run the `.sh` file:
+    
     ```
     ./ubuntu.sh //if you are in ubuntu virtual machine or actual os
     ./ubuntu-wsl.sh //if you are using WSL on Windows
     ```
+    
+    + If you encountered some errors on the first attemp running `sh` file, please try this:
+
+    ```sh
+    sudo apt install dos2unix -y
+    dos2unix <sh file>
+    ./<sh file>
+    ```
+
+
 Refs:
 
 
