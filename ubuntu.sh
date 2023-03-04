@@ -117,13 +117,13 @@ read a
         read input
 until [[ $input == "Y" || $input == "y" || $input == "N" || $input == "n" ]];
 do
-        echo -e ${RED}'Please try again'
+        echo -e ${RED}'Please try again'${CYAN}
         read input
 done
 if [[ $input == "Y" || $input == "y" ]]; then
         sudo reboot -f
 else
-        echo -e ${RED}"Please reboot asap ^_^"
+        echo -e ${RED}"Please reboot asap ^_^"${CYAN}
 fi
 }
 
