@@ -1,19 +1,50 @@
-**FORENSICS**
+# **Tools and Services:**
+
+### ***MEMORY:***
+- Volatility 2
+- Volatility 3
+- LiME
+- avml
+
+### ***STEGANOGRAPHY & OSINT:***
+- exiftool
+- steghide
+- zsteg
+- stegseek
+- stegsolve
+- blackbird
+- holehe
+- Stego-Toolkit docker image
+
+### ***NETWORKING:***
 - Wireshark
-- HxD
-- Autopsy (Windows GUI recommended)
-- FTK Imager
-- IDA
-- Splunk
-- paint.net
-- GIMP
-- Irfranview
-- OurSecret
-- StegSolve
-- PCRT
-- Audacity
-- Registry Viewer
-- dnSpy
+- tshark
+- Fakenet-NG
+
+### ***DISK:***
+- Autopsy (Linux version)
+- ewftools
+
+### ***CRACKING:***
+- John the ripper
+- Hashcat
+- Wordlists from Kali linux distro and Seclists
+
+### ***FILE ANALIZING:***
+- TrID
+- oletools
+
+### ***MISC:***
+- Docker CLi
+- neofetch
+- lolcat
+- batcat
+- nala
+- bpytop
+- openvpn
+- dos2unix
 
 
-- olevba, exiftool, john, hashcat, docker, peepdf, binwalk, holehe, fakenet-ng
+
+
+
