@@ -95,7 +95,8 @@ echo -e ${RED}'Installing Stego and OSINT tools'${CYAN}
         python3 triupdate.py
         sudo cp trid /usr/bin/trid && sudo chmod +x /usr/bin/trid
         echo "echo "LANG=/usr/lib/locale/en_US" | $(echo $SHELL | awk -F '/' '{print $NF}\')" >> $shellrc
-
+        cd ~/lab && git clone https://github.com/megadose/holehe.git && cd holehe
+        sudo python3 setup.py install
 echo -e ${RED}'Press ENTER to continue'${CYAN}
 read a
 
