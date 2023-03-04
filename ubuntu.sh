@@ -51,7 +51,7 @@ echo -e ${RED}'Installing Autopsy'${CYAN}
 echo -e ${RED}'Installing Wireshark and Fakenet'${CYAN}
         echo "wireshark-common wireshark-common/install-setuid boolean true" | sudo debconf-set-selections
         sudo DEBIAN_FRONTEND=noninteractive apt-get -y install wireshark
-        sudo usermod -a -G wireshark ubuntu
+        sudo usermod -a -G wireshark $USER
         sudo apt-get install tshark -y
         git clone https://github.com/mandiant/flare-fakenet-ng.git
         sudo apt-get install build-essential python2-dev libnetfilter-queue-dev
