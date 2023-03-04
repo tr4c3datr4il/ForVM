@@ -8,7 +8,7 @@ shellrc="$HOME/.$(echo $SHELL | awk -F '/' '{print $NF}')"rc
 mkdir ~/lab
 cd ~/lab
 
-echo -e ${RED}'Installing Volatility 2 and 3'${CYAN}
+echo -e ${RED}'Installinging Volatility 2 and 3'${CYAN}
         sudo apt-get install -y curl build-essential git libdistorm3-dev yara libraw1394-11 libcapstone-dev capstone-tool tzdata
         sudo apt-get install -y python2 python2.7-dev libpython2-dev
         curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py
@@ -28,7 +28,7 @@ echo -e ${RED}'Installing Volatility 2 and 3'${CYAN}
 
 echo -e ${RED}'Press ENTER to continue'${CYAN}
 read a
-echo -e ${RED}'Installing Docker'${CYAN}
+echo -e ${RED}'Installinging Docker'${CYAN}
         sudo apt-get install gnome-terminal -y
         sudo apt-get update
         sudo apt-get install ca-certificates gnupg lsb-release -y
@@ -45,10 +45,10 @@ echo -e ${RED}'Installing Docker'${CYAN}
 echo -e ${RED}'Press ENTER to continue'${CYAN}
 read a
 
-echo -e ${RED}'Install Autopsy'${CYAN}
+echo -e ${RED}'Installing Autopsy'${CYAN}
         sudo apt-get install -y autopsy
 
-echo -e ${RED}'Install Wireshark and Fakenet'${CYAN}
+echo -e ${RED}'Installing Wireshark and Fakenet'${CYAN}
         echo "wireshark-common wireshark-common/install-setuid boolean true" | sudo debconf-set-selections
         sudo DEBIAN_FRONTEND=noninteractive apt-get -y install wireshark
         sudo usermod -a -G wireshark ubuntu
@@ -60,7 +60,7 @@ echo -e ${RED}'Install Wireshark and Fakenet'${CYAN}
         cd flare-fakenet-ng
         sudo python2.7 setup.py install
         
-echo -e ${RED}'Install John the Ripper & Hashcat & Wordlists'${CYAN}
+echo -e ${RED}'Installing John the Ripper & Hashcat & Wordlists'${CYAN}
         sudo apt-get install hashcat snapd -y
         sudo snap install john-the-ripper
         git clone https://github.com/danielmiessler/SecLists.git
@@ -70,7 +70,7 @@ echo -e ${RED}'Install John the Ripper & Hashcat & Wordlists'${CYAN}
         cd ~ 
         echo "alias 'wordlists'='echo ~/lab/KaliLists ~/lab/SecLists'" >> $shellrc
 
-echo -e ${RED}'Install Stego and OSINT tools'${CYAN}
+echo -e ${RED}'Installing Stego and OSINT tools'${CYAN}
         cd ~/lab
         sudo apt-get install exiftool steghide -y
         sudo gem install zsteg
@@ -99,7 +99,7 @@ echo -e ${RED}'Install Stego and OSINT tools'${CYAN}
 echo -e ${RED}'Press ENTER to continue'${CYAN}
 read a
 
-echo -e ${RED}'Install oletools'${CYAN}
+echo -e ${RED}'Installing oletools'${CYAN}
         sudo -H python3 -m pip install -U oletools[full]
         cd ~/lab
         git clone https://github.com/jesparza/peepdf.git
@@ -107,6 +107,12 @@ echo -e ${RED}'Install oletools'${CYAN}
         sed -i '1i#!/usr/bin/python2.7' peepdf.py
         sudo cp -r * /usr/bin/
         cd
+
+echo -e ${RED}'Installing Memory Extractor tools'${CYAN}
+        cd ~/lab && mkdir AVML && cd AVML && wget https://github.com/microsoft/avml/releases/download/v0.11.0/avml
+        chmod +x avml
+        cd ~/lab && wget https://github.com/504ensicsLabs/LiME/archive/refs/tags/v1.9.1.zip
+        mkdir LiME && unzip LiME-1.9.1.zip 
 
 echo -e ${RED}'Press ENTER to continue'${CYAN}
 read a
