@@ -94,7 +94,7 @@ echo -e ${RED}'Install Stego and OSINT tools'${CYAN}
         cd trid && wget https://mark0.net/download/tridupdate.zip && unzip tridupdate.zip
         python3 triupdate.py
         sudo cp trid /usr/bin/trid && sudo chmod +x /usr/bin/trid
-        echo "echo "LANG=/usr/lib/locale/en_US" | $(echo $SHELL | awk -F '/' '{print $4}\')" >> $shellrc
+        echo "echo "LANG=/usr/lib/locale/en_US" | $(echo $SHELL | awk -F '/' '{print $NF}\')" >> $shellrc
 
 echo -e ${RED}'Press ENTER to continue'${CYAN}
 read a
