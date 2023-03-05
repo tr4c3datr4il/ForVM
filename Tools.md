@@ -33,6 +33,7 @@
 ### ***FILE ANALIZING:***
 - TrID
 - oletools
+- peepdf
 
 ### ***MISC:***
 - Docker CLi
