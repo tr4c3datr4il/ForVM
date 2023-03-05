@@ -94,6 +94,7 @@ echo -e ${RED}'Installing Stego and OSINT tools'${CYAN}
         cd trid && wget https://mark0.net/download/tridupdate.zip && unzip tridupdate.zip
         python3 triupdate.py
         sudo cp trid /usr/bin/trid && sudo chmod +x /usr/bin/trid
+        sudo cp *.trd /usr/bin/
         echo "echo "LANG=/usr/lib/locale/en_US" | $(echo $SHELL | awk -F '/' '{print $NF}\')" >> $shellrc
         cd ~/lab && git clone https://github.com/megadose/holehe.git && cd holehe
         sudo python3 setup.py install
@@ -113,7 +114,7 @@ echo -e ${RED}'Installing Memory Extractor tools'${CYAN}
         cd ~/lab && mkdir AVML && cd AVML && wget https://github.com/microsoft/avml/releases/download/v0.11.0/avml
         chmod +x avml
         cd ~/lab && wget https://github.com/504ensicsLabs/LiME/archive/refs/tags/v1.9.1.zip
-        mkdir LiME && unzip LiME-1.9.1.zip 
+        mkdir LiME && cd LiME && unzip LiME-1.9.1.zip 
 
 echo -e ${RED}'Press ENTER to continue'${CYAN}
 read a
