@@ -60,7 +60,9 @@ echo -e ${RED}'Installing Wireshark and Fakenet'${CYAN}
         cd ~/lab/flare-fakenet-ng
         sudo python2.7 setup.py install
         python3 -m pip install pyshark
-
+        cd ~/lab && wget https://github.com/brimdata/brim/releases/tag/v0.31.0
+        sudo dpkg -i Brim-0.31.0.deb
+        
 echo -e ${RED}'Installing John the Ripper & Hashcat & Wordlists'${CYAN}
         sudo apt-get install hashcat snapd -y
         sudo snap install john-the-ripper
