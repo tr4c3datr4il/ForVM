@@ -4,7 +4,7 @@ CYAN='\033[0;36m'
 
 function main {
 sudo apt-get update && sudo apt-get upgrade -y
-shellrc="$HOME/.$(echo $SHELL | awk -F '/' '{print $NF}')"rc
+SHELL_RC_FILE="$HOME/.$(echo $SHELL | awk -F '/' '{print $NF}')"rc
 mkdir ~/lab
 cd ~/lab
 
@@ -21,7 +21,7 @@ echo -e ${RED}'Installing Volatility 2 and 3'${CYAN}
         sudo apt-get install -y python3 python3-dev libpython3-dev python3-pip python3-setuptools python3-wheel
         python3 -m pip install -U distorm3 pillow openpyxl ujson pytz ipython capstone pefile yara-python pycryptodome jsonschema leechcorepyc python-snappy
         python3 -m pip install -U git+https://github.com/volatilityfoundation/volatility3.git
-        echo -e "export PATH=/home/$USER/.local/bin:$PATH" >> $shellrc
+        echo -e "export PATH=/home/$USER/.local/bin:$PATH" >> $SHELL_RC_FILE
         git clone https://github.com/superponible/volatility-plugins.git
         sudo cp ~/lab/volatility-plugins/* ~/.local/lib/python2.7/site-packages/volatility/plugins/
         git clone https://github.com/volatilityfoundation/volatility.git
@@ -68,7 +68,7 @@ echo -e ${RED}'Installing John the Ripper & Hashcat & Wordlists'${CYAN}
         git clone https://github.com/3ndG4me/KaliLists.git
         cd KaliLists/ 
         gunzip rockyou.txt.gz 
-        echo "alias 'wordlists'='echo ~/lab/KaliLists ~/lab/SecLists'" >> $shellrc
+        echo "alias 'wordlists'='echo ~/lab/KaliLists ~/lab/SecLists'" >> $SHELL_RC_FILE
         cd ~/lab && git clone https://github.com/Yara-Rules/rules.git
 
 echo -e ${RED}'Installing Stego and OSINT tools'${CYAN}
@@ -96,7 +96,7 @@ echo -e ${RED}'Installing Stego and OSINT tools'${CYAN}
         python3 triupdate.py
         sudo cp trid /usr/bin/trid && sudo chmod +x /usr/bin/trid
         sudo cp *.trd /usr/bin/
-        echo "echo "LANG=/usr/lib/locale/en_US" | $(echo $SHELL | awk -F '/' '{print $NF}\')" >> $shellrc
+        echo "echo "LANG=/usr/lib/locale/en_US" | $(echo $SHELL | awk -F '/' '{print $NF}\')" >> $SHELL_RC_FILE
         cd ~/lab && git clone https://github.com/megadose/holehe.git && cd holehe
         sudo python3 setup.py install
 
@@ -110,7 +110,7 @@ echo -e ${RED}'Installing oletools'${CYAN}
         cd peepdf
         sed -i '1i#!/usr/bin/python2.7' peepdf.py
         cd ~/lab && sudo cp -r peepdf/ /usr/bin
-        echo -e "export PATH=/usr/bin/peepdf:$PATH" >> $shellrc
+        echo -e "export PATH=/usr/bin/peepdf:$PATH" >> $SHELL_RC_FILE
 
 echo -e ${RED}'Installing Memory Extractor tools'${CYAN}
         cd ~/lab && mkdir AVML && cd AVML && wget https://github.com/microsoft/avml/releases/download/v0.11.0/avml
