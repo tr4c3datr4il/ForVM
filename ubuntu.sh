@@ -67,9 +67,8 @@ echo -e ${RED}'Installing John the Ripper & Hashcat & Wordlists'${CYAN}
         git clone https://github.com/3ndG4me/KaliLists.git
         cd KaliLists/ 
         gunzip rockyou.txt.gz 
-        cd ~ 
         echo "alias 'wordlists'='echo ~/lab/KaliLists ~/lab/SecLists'" >> $shellrc
-
+        cd ~/lab && git clone https://github.com/Yara-Rules/rules.git
 echo -e ${RED}'Installing Stego and OSINT tools'${CYAN}
         cd ~/lab
         sudo apt-get install exiftool steghide -y
