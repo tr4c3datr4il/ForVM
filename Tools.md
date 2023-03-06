@@ -16,10 +16,11 @@
 - holehe
 - Stego-Toolkit docker image
 
-### ***NETWORKING:***
+### ***NETWORKING and LOG/MONITORING:***
 - Wireshark
 - tshark
 - Fakenet-NG
+- Elastic (Kibana and Search)
 
 ### ***DISK:***
 - Autopsy (Linux version)
