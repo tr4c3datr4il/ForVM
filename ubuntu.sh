@@ -60,6 +60,7 @@ echo -e ${RED}'Installing Wireshark and Fakenet'${CYAN}
         cd flare-fakenet-ng
         sudo python2.7 setup.py install
         python3 -m pip install pyshark
+
 echo -e ${RED}'Installing John the Ripper & Hashcat & Wordlists'${CYAN}
         sudo apt-get install hashcat snapd -y
         sudo snap install john-the-ripper
@@ -69,6 +70,7 @@ echo -e ${RED}'Installing John the Ripper & Hashcat & Wordlists'${CYAN}
         gunzip rockyou.txt.gz 
         echo "alias 'wordlists'='echo ~/lab/KaliLists ~/lab/SecLists'" >> $shellrc
         cd ~/lab && git clone https://github.com/Yara-Rules/rules.git
+
 echo -e ${RED}'Installing Stego and OSINT tools'${CYAN}
         cd ~/lab
         sudo apt-get install exiftool steghide -y
@@ -97,6 +99,7 @@ echo -e ${RED}'Installing Stego and OSINT tools'${CYAN}
         echo "echo "LANG=/usr/lib/locale/en_US" | $(echo $SHELL | awk -F '/' '{print $NF}\')" >> $shellrc
         cd ~/lab && git clone https://github.com/megadose/holehe.git && cd holehe
         sudo python3 setup.py install
+
 echo -e ${RED}'Press ENTER to continue'${CYAN}
 read a
 
@@ -107,7 +110,7 @@ echo -e ${RED}'Installing oletools'${CYAN}
         cd peepdf
         sed -i '1i#!/usr/bin/python2.7' peepdf.py
         cd ~/lab && sudo cp -r peepdf/ /usr/bin
-        
+        echo -e "export PATH=/usr/bin/peepdf:$PATH" >> $shellrc
 
 echo -e ${RED}'Installing Memory Extractor tools'${CYAN}
         cd ~/lab && mkdir AVML && cd AVML && wget https://github.com/microsoft/avml/releases/download/v0.11.0/avml
