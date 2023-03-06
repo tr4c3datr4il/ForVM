@@ -62,6 +62,10 @@ echo -e ${RED}'Installing Wireshark and Fakenet'${CYAN}
         python3 -m pip install pyshark
         cd ~/lab && wget https://github.com/brimdata/brim/releases/tag/v0.31.0
         sudo dpkg -i Brim-0.31.0.deb
+        wget https://artifacts.elastic.co/downloads/kibana/kibana-8.6.2-linux-x86_64.tar.gz
+        wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.6.2-linux-x86_64.tar.gz
+        gunzip  kibana-8.6.2-linux-x86_64.tar.gz && tar -xf kibana-8.6.2-linux-x86_64.tar
+        gunzip elasticsearch-8.6.2-linux-x86_64.tar.gz && tar -xf elasticsearch-8.6.2-linux-x86_64.tar
         
 echo -e ${RED}'Installing John the Ripper & Hashcat & Wordlists'${CYAN}
         sudo apt-get install hashcat snapd -y
