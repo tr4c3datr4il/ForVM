@@ -48,7 +48,7 @@ read a
 echo -e ${RED}'Installing Autopsy'${CYAN}
         sudo apt-get install -y autopsy
 
-echo -e ${RED}'Installing Wireshark and Fakenet'${CYAN}
+echo -e ${RED}'Installing Networking and Log/Monitoring tools'${CYAN}
         echo "wireshark-common wireshark-common/install-setuid boolean true" | sudo debconf-set-selections
         sudo DEBIAN_FRONTEND=noninteractive apt-get -y install wireshark
         sudo usermod -a -G wireshark $USER
@@ -66,8 +66,8 @@ echo -e ${RED}'Installing Wireshark and Fakenet'${CYAN}
         wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.6.2-linux-x86_64.tar.gz
         gunzip  kibana-8.6.2-linux-x86_64.tar.gz && tar -xf kibana-8.6.2-linux-x86_64.tar
         gunzip elasticsearch-8.6.2-linux-x86_64.tar.gz && tar -xf elasticsearch-8.6.2-linux-x86_64.tar
-        
-echo -e ${RED}'Installing John the Ripper & Hashcat & Wordlists'${CYAN}
+
+echo -e ${RED}'Installing Cracking tools & Wordlists'${CYAN}
         sudo apt-get install hashcat snapd -y
         sudo snap install john-the-ripper
         git clone https://github.com/danielmiessler/SecLists.git
@@ -109,7 +109,7 @@ echo -e ${RED}'Installing Stego and OSINT tools'${CYAN}
 echo -e ${RED}'Press ENTER to continue'${CYAN}
 read a
 
-echo -e ${RED}'Installing oletools'${CYAN}
+echo -e ${RED}'Installing File analizing tools'${CYAN}
         sudo -H python3 -m pip install -U oletools[full]
         cd ~/lab
         git clone https://github.com/jesparza/peepdf.git
