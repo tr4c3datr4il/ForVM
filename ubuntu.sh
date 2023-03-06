@@ -106,8 +106,8 @@ echo -e ${RED}'Installing oletools'${CYAN}
         git clone https://github.com/jesparza/peepdf.git
         cd peepdf
         sed -i '1i#!/usr/bin/python2.7' peepdf.py
-        sudo cp -r * /usr/bin/
-        cd
+        cd ~/lab && sudo cp -r peepdf/ /usr/bin
+        
 
 echo -e ${RED}'Installing Memory Extractor tools'${CYAN}
         cd ~/lab && mkdir AVML && cd AVML && wget https://github.com/microsoft/avml/releases/download/v0.11.0/avml
