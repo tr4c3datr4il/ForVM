@@ -59,7 +59,7 @@ echo -e ${RED}'Installing Wireshark and Fakenet'${CYAN}
         sudo python2 -m pip install https://github.com/mandiant/flare-fakenet-ng/zipball/master
         cd flare-fakenet-ng
         sudo python2.7 setup.py install
-        
+        python3 -m pip install pyshark
 echo -e ${RED}'Installing John the Ripper & Hashcat & Wordlists'${CYAN}
         sudo apt-get install hashcat snapd -y
         sudo snap install john-the-ripper
