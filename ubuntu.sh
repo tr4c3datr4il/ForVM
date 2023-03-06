@@ -8,7 +8,7 @@ shellrc="$HOME/.$(echo $SHELL | awk -F '/' '{print $NF}')"rc
 mkdir ~/lab
 cd ~/lab
 
-echo -e ${RED}'Installinging Volatility 2 and 3'${CYAN}
+echo -e ${RED}'Installing Volatility 2 and 3'${CYAN}
         sudo apt-get install -y curl build-essential git libdistorm3-dev yara libraw1394-11 libcapstone-dev capstone-tool tzdata
         sudo apt-get install -y python2 python2.7-dev libpython2-dev
         curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py
