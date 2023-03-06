@@ -28,7 +28,7 @@ echo -e ${RED}'Installing Volatility 2 and 3'${CYAN}
 
 echo -e ${RED}'Press ENTER to continue'${CYAN}
 read a
-echo -e ${RED}'Installinging Docker'${CYAN}
+echo -e ${RED}'Installing Docker'${CYAN}
         sudo apt-get install gnome-terminal -y
         sudo apt-get update
         sudo apt-get install ca-certificates gnupg lsb-release -y
