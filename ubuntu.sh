@@ -57,7 +57,7 @@ echo -e ${RED}'Installing Wireshark and Fakenet'${CYAN}
         sudo apt-get install build-essential python2-dev libnetfilter-queue-dev
         python2 -m pip install requests
         sudo python2 -m pip install https://github.com/mandiant/flare-fakenet-ng/zipball/master
-        cd flare-fakenet-ng
+        cd ~/lab/flare-fakenet-ng
         sudo python2.7 setup.py install
         python3 -m pip install pyshark
 
