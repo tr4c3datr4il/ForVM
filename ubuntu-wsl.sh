@@ -29,7 +29,7 @@ echo -e ${RED}'Installing Volatility 2 and 3'${CYAN}
 echo -e ${RED}'Press ENTER to continue'${CYAN}
 read a
 
-echo -e ${RED}'Installing Networking and Log/Monitoring tools'${CYAN}
+echo -e ${RED}'Installing Networking tools'${CYAN}
         sudo apt-get install tshark -y
         git clone https://github.com/mandiant/flare-fakenet-ng.git
         sudo apt-get install build-essential python2-dev libnetfilter-queue-dev
