@@ -90,12 +90,6 @@ echo -e ${RED}'Installing File analizing tools'${CYAN}
         cd ~/lab && sudo cp -r peepdf/ /usr/bin
         echo -e "export PATH=/usr/bin/peepdf:$PATH" >> $SHELL_RC_FILE
 
-echo -e ${RED}'Installing Memory Extractor tools'${CYAN}
-        cd ~/lab && mkdir AVML && cd AVML && wget https://github.com/microsoft/avml/releases/download/v0.11.0/avml
-        chmod +x avml
-        cd ~/lab && wget https://github.com/504ensicsLabs/LiME/archive/refs/tags/v1.9.1.zip
-        mkdir LiME && cd LiME && unzip LiME-1.9.1.zip 
-
 echo -e ${RED}'Press ENTER to continue'${CYAN}
 read a
         sudo apt-get update
