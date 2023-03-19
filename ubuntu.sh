@@ -55,8 +55,8 @@ echo -e ${RED}'Installing Networking and Log/Monitoring tools'${CYAN}
         cd ~/lab/flare-fakenet-ng
         sudo python2.7 setup.py install
         python3 -m pip install pyshark
-        cd ~/lab && wget https://github.com/brimdata/brim/releases/tag/v0.31.0
-        sudo dpkg -i Brim-0.31.0.deb -y
+        cd ~/lab && wget https://github.com/brimdata/zui/releases/download/v1.0.0/zui_1.0.0_amd64.deb -O zui_1.0.0_amd64.deb
+        sudo dpkg -i zui_1.0.0_amd64.deb -y
         wget https://artifacts.elastic.co/downloads/kibana/kibana-8.6.2-linux-x86_64.tar.gz
         wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.6.2-linux-x86_64.tar.gz
         gunzip  kibana-8.6.2-linux-x86_64.tar.gz && tar -xf kibana-8.6.2-linux-x86_64.tar
