@@ -123,6 +123,7 @@ read a
         sudo apt-get update
         sudo apt-get install -y neofetch lolcat batcat nala htop bpytop bison flex dwarfdump openssh-server net-tools openvpn dos2unix ewf-tools
         sudo apt-get upgrade -y 
+        sudo apt autoremove
         echo -e ${RED}'Do you want to reboot the system? If not, please do it manually to make sure everything is working fine!'${CYAN}
         read input
 until [[ $input == "Y" || $input == "y" || $input == "N" || $input == "n" ]];
