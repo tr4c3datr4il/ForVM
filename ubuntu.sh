@@ -26,8 +26,6 @@ echo -e ${RED}'Installing Volatility 2 and 3'${CYAN}
         sudo cp ~/lab/volatility-plugins/* ~/.local/lib/python2.7/site-packages/volatility/plugins/
         git clone https://github.com/volatilityfoundation/volatility.git
 
-echo -e ${RED}'Press ENTER to continue'${CYAN}
-read a
 echo -e ${RED}'Installing Docker'${CYAN}
         sudo apt-get install gnome-terminal -y
         sudo apt-get update
@@ -41,9 +39,6 @@ echo -e ${RED}'Installing Docker'${CYAN}
         sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
         sudo docker pull dominicbreuker/stego-toolkit
         sudo usermod -aG docker $USER
-
-echo -e ${RED}'Press ENTER to continue'${CYAN}
-read a
 
 echo -e ${RED}'Installing Autopsy'${CYAN}
         sudo apt-get install -y autopsy
@@ -107,10 +102,7 @@ echo -e ${RED}'Installing Stego and OSINT tools'${CYAN}
         echo "echo "LANG=/usr/lib/locale/en_US" | $(echo $SHELL | awk -F '/' '{print $NF}\')" >> $SHELL_RC_FILE
         cd ~/lab && git clone https://github.com/megadose/holehe.git && cd holehe
         sudo python3 setup.py install
-
-echo -e ${RED}'Press ENTER to continue'${CYAN}
-read a
-
+        
 echo -e ${RED}'Installing File analizing tools'${CYAN}
         sudo -H python3 -m pip install -U oletools[full]
         cd ~/lab
