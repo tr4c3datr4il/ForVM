@@ -49,14 +49,14 @@ echo -e ${RED}'Installing Networking and Log/Monitoring tools'${CYAN}
         sudo usermod -a -G wireshark $USER
         sudo apt-get install tshark -y
         git clone https://github.com/mandiant/flare-fakenet-ng.git
-        sudo apt-get install build-essential python2-dev libnetfilter-queue-dev
+        sudo apt-get install build-essential python2-dev libnetfilter-queue-dev -y
         python2 -m pip install requests
         sudo python2 -m pip install https://github.com/mandiant/flare-fakenet-ng/zipball/master
         cd ~/lab/flare-fakenet-ng
         sudo python2.7 setup.py install
         python3 -m pip install pyshark
         cd ~/lab && wget https://github.com/brimdata/brim/releases/tag/v0.31.0
-        sudo dpkg -i Brim-0.31.0.deb
+        sudo dpkg -i Brim-0.31.0.deb -y
         wget https://artifacts.elastic.co/downloads/kibana/kibana-8.6.2-linux-x86_64.tar.gz
         wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.6.2-linux-x86_64.tar.gz
         gunzip  kibana-8.6.2-linux-x86_64.tar.gz && tar -xf kibana-8.6.2-linux-x86_64.tar
