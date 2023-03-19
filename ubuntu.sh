@@ -102,7 +102,7 @@ echo -e ${RED}'Installing Stego and OSINT tools'${CYAN}
         echo "echo "LANG=/usr/lib/locale/en_US" | $(echo $SHELL | awk -F '/' '{print $NF}\')" >> $SHELL_RC_FILE
         cd ~/lab && git clone https://github.com/megadose/holehe.git && cd holehe
         sudo python3 setup.py install
-        
+
 echo -e ${RED}'Installing File analizing tools'${CYAN}
         sudo -H python3 -m pip install -U oletools[full]
         cd ~/lab
@@ -137,4 +137,4 @@ else
 fi
 }
 
-main 2>&1 | tee install_log.txt
+main 2>&1 | tee Installation.log
