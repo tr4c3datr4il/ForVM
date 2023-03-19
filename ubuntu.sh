@@ -139,4 +139,11 @@ fi
 }
 
 main 2>&1 | tee Installation.log
-cat Installation.log | grep -i "error" > Error.log
+
+val="$( cat Installation.log | grep -i "error" )"
+if [[ "$val" ]] ; then 
+        cat Installation.log | grep -i "error" > Error.log 
+else
+        echo "No error during installation" > Error.log
+fi
+
