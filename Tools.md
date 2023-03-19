@@ -21,6 +21,7 @@
 - tshark
 - Fakenet-NG
 - Elastic (Kibana and Search)
+- chainsaw
 
 ### ***DISK:***
 - Autopsy (Linux version)
