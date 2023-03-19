@@ -76,7 +76,7 @@ echo -e ${RED}'Installing Cracking tools & Wordlists'${CYAN}
 
 echo -e ${RED}'Installing Stego and OSINT tools'${CYAN}
         cd ~/lab
-        sudo apt-get install exiftool steghide -y
+        sudo apt-get install unzip exiftool steghide -y
         sudo gem install zsteg
         wget https://github.com/RickdeJager/stegseek/releases/download/v0.6/stegseek_0.6-1.deb
         chmod +x ./stegseek_0.6-1.deb
