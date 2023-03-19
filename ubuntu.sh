@@ -138,3 +138,4 @@ fi
 }
 
 main 2>&1 | tee Installation.log
+cat Installation.log | grep -i "error" > Error.log
