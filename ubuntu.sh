@@ -66,6 +66,8 @@ echo -e ${RED}'Installing Networking and Log/Monitoring tools'${CYAN}
         wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.6.2-linux-x86_64.tar.gz
         gunzip  kibana-8.6.2-linux-x86_64.tar.gz && tar -xf kibana-8.6.2-linux-x86_64.tar
         gunzip elasticsearch-8.6.2-linux-x86_64.tar.gz && tar -xf elasticsearch-8.6.2-linux-x86_64.tar
+        cd ~/lab && wget https://github.com/WithSecureLabs/chainsaw/releases/download/v2.5.0/chainsaw_x86_64-unknown-linux-gnu.tar.gz
+        gunzip chainsaw_x86_64-unknown-linux-gnu.tar.gz && tar -xf chainsaw_x86_64-unknown-linux-gnu.tar
 
 echo -e ${RED}'Installing Cracking tools & Wordlists'${CYAN}
         sudo apt-get install hashcat snapd -y
