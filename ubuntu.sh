@@ -128,7 +128,7 @@ function Disk {
         sudo apt-get install -y autopsy ewf-tools
 }
 
-function edit_grub {
+function Edit_grub {
         sudo cp /etc/default/grub /etc/default/grub.backup
 echo 'GRUB_DEFAULT=0
 GRUB_TIMEOUT_STYLE=menu
@@ -139,7 +139,6 @@ GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"
 GRUB_CMDLINE_LINUX="find_preseed=/preseed.cfg auto noprompt priority=critical locale=en_US"
 GRUB_DISABLE_OS_PROBER=false' > /etc/default/grub
 }
-
 
 function Main {
         sudo apt-get update && sudo apt-get upgrade -y
@@ -154,6 +153,7 @@ function Main {
         Disk
         Stego_Osint
         Misc
+        Edit_grub
 
         echo -e ${RED}'Press ENTER to continue'${CYAN}
         read a
