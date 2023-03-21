@@ -12,7 +12,7 @@ function Dependencies {
                                 python3-setuptools python3-wheel python3.10-venv
         sudo apt-get install -y libnetfilter-queue-dev
         sudo apt-get install gnome-terminal -y
-        sudo apt update && sudo apt upgrade -y
+        sudo apt-get update && sudo apt-get upgrade -y
 }
 
 function Memory {
