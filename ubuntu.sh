@@ -2,19 +2,6 @@
 RED='\033[0;31m'
 CYAN='\033[0;36m'
 
-edit_lines() {
-  local file="$1"
-  local pattern="$2"
-  local replacement="$3"
-  if [[ ! -f "$file" ]]; then
-    echo "File not found: $file" >&2
-    return 1
-  fi
-  sed -i "/$pattern/s/.*/$replacement/" "$file"
-}
-
-# Example usage: replace all occurrences of "foo" with "bar" in file.txt
-# edit_lines "file.txt" "foo" "bar"
 
 function main {
 sudo apt-get update && sudo apt-get upgrade -y
