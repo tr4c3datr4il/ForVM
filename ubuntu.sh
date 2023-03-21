@@ -130,7 +130,7 @@ function Disk {
 
 function Edit_grub {
         sudo cp /etc/default/grub /etc/default/grub.backup
-        echo 'GRUB_DEFAULT=0
+        sudo echo 'GRUB_DEFAULT=0
 GRUB_TIMEOUT_STYLE=menu
 GRUB_HIDDEN_TIMEOUT=5
 GRUB_TIMEOUT=10
