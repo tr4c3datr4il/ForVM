@@ -130,7 +130,7 @@ function Disk {
 
 function Edit_grub {
         sudo cp /etc/default/grub /etc/default/grub.backup
-echo 'GRUB_DEFAULT=0
+        echo 'GRUB_DEFAULT=0
 GRUB_TIMEOUT_STYLE=menu
 GRUB_HIDDEN_TIMEOUT=5
 GRUB_TIMEOUT=10
@@ -138,6 +138,7 @@ GRUB_DISTRIBUTOR=`lsb_release -i -s 2> /dev/null || echo Debian`
 GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"
 GRUB_CMDLINE_LINUX="find_preseed=/preseed.cfg auto noprompt priority=critical locale=en_US"
 GRUB_DISABLE_OS_PROBER=false' > /etc/default/grub
+        sudo update-grub 
 }
 
 function Main {
