@@ -23,6 +23,8 @@ echo -e ${RED}'Installing Volatility 2 and 3'${CYAN}
         python3 -m pip install -U git+https://github.com/volatilityfoundation/volatility3.git
         git clone https://github.com/superponible/volatility-plugins.git
         sudo cp ~/lab/volatility-plugins/* ~/.local/lib/python2.7/site-packages/volatility/plugins/
+        git clone https://github.com/kudelskisecurity/volatility-gpg.git
+        sudo cp ~/lab/voatility-gpg/linux/* ~/.local/lib/python3.10/site-packages/volatility3/framework/plugins/linux/
         git clone https://github.com/volatilityfoundation/volatility.git
 
 echo -e ${RED}'Installing Docker'${CYAN}
