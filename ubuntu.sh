@@ -2,6 +2,20 @@
 RED='\033[0;31m'
 CYAN='\033[0;36m'
 
+edit_lines() {
+  local file="$1"
+  local pattern="$2"
+  local replacement="$3"
+  if [[ ! -f "$file" ]]; then
+    echo "File not found: $file" >&2
+    return 1
+  fi
+  sed -i "/$pattern/s/.*/$replacement/" "$file"
+}
+
+# Example usage: replace all occurrences of "foo" with "bar" in file.txt
+# edit_lines "file.txt" "foo" "bar"
+
 function main {
 sudo apt-get update && sudo apt-get upgrade -y
 SHELL_RC_FILE="$HOME/.$(echo $SHELL | awk -F '/' '{print $NF}')"rc
@@ -100,7 +114,7 @@ echo -e ${RED}'Installing Stego and OSINT tools'${CYAN}
         python3 triupdate.py
         sudo cp trid /usr/bin/trid && sudo chmod +x /usr/bin/trid
         sudo cp *.trd /usr/bin/
-        echo "echo "LANG=/usr/lib/locale/en_US" | $(echo $SHELL | awk -F '/' '{print $NF}\')" >> $SHELL_RC_FILE
+        echo -e "export LANG=/usr/lib/locale/en_US" >> $SHELL_RC_FILE
         cd ~/lab && git clone https://github.com/megadose/holehe.git && cd holehe
         sudo python3 setup.py install
 
