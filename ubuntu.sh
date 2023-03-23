@@ -80,6 +80,9 @@ function Misc {
         sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
         sudo docker pull dominicbreuker/stego-toolkit
         sudo usermod -aG docker $USER
+        cd ~/lab && git clone https://github.com/TheDarkBug/uwufetch.git && cd uwufetch
+        make build
+        sudo make install
 }
 
 function Stego_Osint {
