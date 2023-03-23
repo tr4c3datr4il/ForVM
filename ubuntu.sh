@@ -106,7 +106,7 @@ function Stego_Osint {
         cd ~/lab
         wget https://mark0.net/download/trid_linux_64.zip && mkdir trid && unzip trid_linux_64.zip -d ./trid
         cd trid && wget https://mark0.net/download/tridupdate.zip && unzip tridupdate.zip
-        python3 triupdate.py
+        python3 tridupdate.py
         cp trid /usr/bin/trid && sudo chmod +x /usr/bin/trid
         cp *.trd /usr/bin/
         echo -e "export LANG=/usr/lib/locale/en_US" >> $SHELL_RC_FILE
