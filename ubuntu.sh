@@ -162,7 +162,7 @@ function Main {
         echo -e ${RED}'Press ENTER to continue'${CYAN}
         read a
                 sudo apt-get update
-                sudo apt-get install -y neofetch lolcat batcat nala htop bpytop bison flex dwarfdump openssh-server net-tools openvpn dos2unix
+                sudo apt-get install -y neofetch lolcat bat nala htop bpytop bison flex dwarfdump openssh-server net-tools openvpn dos2unix
                 sudo apt-get upgrade -y 
                 sudo apt autoremove
                 echo -e "export PATH=/usr/bin/peepdf:/home/\$USER/.local/bin:\$PATH" >> $SHELL_RC_FILE
