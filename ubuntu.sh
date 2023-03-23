@@ -28,7 +28,7 @@ function Memory {
         git clone https://github.com/superponible/volatility-plugins.git
         cp ~/lab/volatility-plugins/* ~/.local/lib/python2.7/site-packages/volatility/plugins/
         git clone https://github.com/kudelskisecurity/volatility-gpg.git
-        cp ~/lab/voatility-gpg/linux/* ~/.local/lib/python3.10/site-packages/volatility3/framework/plugins/linux/
+        cp ~/lab/volatility-gpg/linux/* ~/.local/lib/python3.10/site-packages/volatility3/framework/plugins/linux/
         git clone https://github.com/volatilityfoundation/volatility.git
         echo -e ${RED}'Installing Memory Extractor tools'${CYAN}
         cd ~/lab && mkdir AVML && cd AVML && wget https://github.com/microsoft/avml/releases/download/v0.11.0/avml
