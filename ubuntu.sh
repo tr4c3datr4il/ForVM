@@ -7,7 +7,7 @@ function Dependencies {
         sudo apt-get install unzip snapd default-jre curl yara git -y
         sudo apt-get install -y build-essential libdistorm3-dev libraw1394-11 \
                                 libcapstone-dev capstone-tool tzdata
-        sudo apt-get install -y python2 python2.7-dev libpython2-dev
+        sudo apt-get install -y python2.7 python2.7-dev libpython2-dev
         sudo apt-get install -y python3 python3-dev libpython3-dev python3-pip \
                                 python3-setuptools python3-wheel python3.10-venv
         sudo apt-get install -y libnetfilter-queue-dev libssl-dev
@@ -18,11 +18,11 @@ function Dependencies {
 function Memory {
         echo -e ${RED}'Installing Volatility 2 and 3'${CYAN}
         curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py
-        sudo python2 get-pip.py
-        sudo python2 -m pip install -U setuptools wheel
-        python2 -m pip install -U distorm3 yara-python pycryptodome pillow openpyxl ujson pytz ipython capstone construct==2.5.5-reupload
+        sudo python2.7 get-pip.py
+        sudo python2.7 -m pip install -U setuptools wheel
+        python2.7 -m pip install -U distorm3 yara-python pycryptodome pillow openpyxl ujson pytz ipython capstone construct==2.5.5-reupload
         sudo ln -s ~/.local/lib/python2.7/site-packages/usr/lib/libyara.so /usr/lib/libyara.so
-        python2 -m pip install -U git+https://github.com/volatilityfoundation/volatility.git
+        python2.7 -m pip install -U git+https://github.com/volatilityfoundation/volatility.git
         python3 -m pip install -U distorm3 pillow openpyxl ujson pytz ipython capstone pefile yara-python pycryptodome jsonschema leechcorepyc python-snappy
         python3 -m pip install -U git+https://github.com/volatilityfoundation/volatility3.git
         git clone https://github.com/superponible/volatility-plugins.git
@@ -44,8 +44,8 @@ function Networking_Logging {
         sudo usermod -a -G wireshark $USER
         sudo apt-get install tshark -y
         git clone https://github.com/mandiant/flare-fakenet-ng.git
-        python2 -m pip install requests
-        sudo python2 -m pip install https://github.com/mandiant/flare-fakenet-ng/zipball/master
+        python2.7 -m pip install requests
+        sudo python2.7 -m pip install https://github.com/mandiant/flare-fakenet-ng/zipball/master
         cd ~/lab/flare-fakenet-ng
         sudo python2.7 setup.py install
         python3 -m pip install pyshark
@@ -57,6 +57,7 @@ function Networking_Logging {
         gunzip elasticsearch-8.6.2-linux-x86_64.tar.gz && tar -xf elasticsearch-8.6.2-linux-x86_64.tar
         cd ~/lab && wget https://github.com/WithSecureLabs/chainsaw/releases/download/v2.5.0/chainsaw_x86_64-unknown-linux-gnu.tar.gz
         gunzip chainsaw_x86_64-unknown-linux-gnu.tar.gz && tar -xf chainsaw_x86_64-unknown-linux-gnu.tar
+        cd ~/lab/chainsaw/ && sudo cp chainsaw /usr/bin/chainsaw && chmod +x /usr/bin/chainsaw
 }
 
 function File_analizing {
