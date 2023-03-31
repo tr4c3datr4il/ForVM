@@ -57,7 +57,7 @@ function Networking_Logging {
         gunzip elasticsearch-8.6.2-linux-x86_64.tar.gz && tar -xf elasticsearch-8.6.2-linux-x86_64.tar
         cd ~/lab && wget https://github.com/WithSecureLabs/chainsaw/releases/download/v2.5.0/chainsaw_x86_64-unknown-linux-gnu.tar.gz
         gunzip chainsaw_x86_64-unknown-linux-gnu.tar.gz && tar -xf chainsaw_x86_64-unknown-linux-gnu.tar
-        cd ~/lab/chainsaw/ && sudo cp chainsaw /usr/bin/chainsaw && chmod +x /usr/bin/chainsaw
+        cd ~/lab/chainsaw/ && sudo cp chainsaw /usr/bin/chainsaw && sudo chmod +x /usr/bin/chainsaw
 }
 
 function File_analizing {
@@ -108,7 +108,7 @@ function Stego_Osint {
         wget https://mark0.net/download/trid_linux_64.zip && mkdir trid && unzip trid_linux_64.zip -d ./trid
         cd trid && wget https://mark0.net/download/tridupdate.zip && unzip tridupdate.zip
         python3 tridupdate.py
-        cp trid /usr/bin/trid && sudo chmod +x /usr/bin/trid
+        sudo cp trid /usr/bin/trid && sudo chmod +x /usr/bin/trid
         cp *.trd /usr/bin/
         echo -e "export LANG=/usr/lib/locale/en_US" >> $SHELL_RC_FILE
         cd ~/lab && git clone https://github.com/megadose/holehe.git && cd holehe
