@@ -10,7 +10,7 @@ function Dependencies {
         sudo apt-get install -y python2 python2.7-dev libpython2-dev
         sudo apt-get install -y python3 python3-dev libpython3-dev python3-pip \
                                 python3-setuptools python3-wheel python3.10-venv
-        sudo apt-get install -y libnetfilter-queue-dev
+        sudo apt-get install -y libnetfilter-queue-dev libssl-dev
         sudo apt-get install gnome-terminal -y
         sudo apt-get update && sudo apt-get upgrade -y
 }
@@ -21,7 +21,7 @@ function Memory {
         sudo python2 get-pip.py
         sudo python2 -m pip install -U setuptools wheel
         python2 -m pip install -U distorm3 yara-python pycryptodome pillow openpyxl ujson pytz ipython capstone construct==2.5.5-reupload
-        sudo ln -s /usr/local/lib/python2.7/dist-packages/usr/lib/libyara.so /usr/lib/libyara.so
+        sudo ln -s ~/.local/lib/python2.7/site-packages/usr/lib/libyara.so /usr/lib/libyara.so
         python2 -m pip install -U git+https://github.com/volatilityfoundation/volatility.git
         python3 -m pip install -U distorm3 pillow openpyxl ujson pytz ipython capstone pefile yara-python pycryptodome jsonschema leechcorepyc python-snappy
         python3 -m pip install -U git+https://github.com/volatilityfoundation/volatility3.git
