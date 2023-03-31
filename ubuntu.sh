@@ -10,7 +10,7 @@ function Dependencies {
         sudo apt-get install -y python2.7 python2.7-dev libpython2-dev
         sudo apt-get install -y python3 python3-dev libpython3-dev python3-pip \
                                 python3-setuptools python3-wheel python3.10-venv
-        sudo apt-get install -y libnetfilter-queue-dev libssl-dev
+        sudo apt-get install -y libnetfilter-queue-dev libssl-dev libssl3
         sudo apt-get install gnome-terminal -y
         sudo apt-get update && sudo apt-get upgrade -y
 }
@@ -109,7 +109,7 @@ function Stego_Osint {
         cd trid && wget https://mark0.net/download/tridupdate.zip && unzip tridupdate.zip
         python3 tridupdate.py
         sudo cp trid /usr/bin/trid && sudo chmod +x /usr/bin/trid
-        cp *.trd /usr/bin/
+        sudo cp *.trd /usr/bin/
         echo -e "export LANG=/usr/lib/locale/en_US" >> $SHELL_RC_FILE
         cd ~/lab && git clone https://github.com/megadose/holehe.git && cd holehe
         sudo python3 setup.py install
