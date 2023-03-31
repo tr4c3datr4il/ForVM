@@ -103,7 +103,7 @@ function Stego_Osint {
         pipx ensurepath
         pipx install ghunt
         sed -i '1i#!/usr/bin/python3' ~/lab/blackbird/blackbird.py
-        cp ~/lab/blackbird/blackbird.py /usr/bin/blackbird.py
+        sudo cp ~/lab/blackbird/blackbird.py /usr/bin/blackbird.py
         cd ~/lab
         wget https://mark0.net/download/trid_linux_64.zip && mkdir trid && unzip trid_linux_64.zip -d ./trid
         cd trid && wget https://mark0.net/download/tridupdate.zip && unzip tridupdate.zip
