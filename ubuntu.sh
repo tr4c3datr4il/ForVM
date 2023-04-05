@@ -155,6 +155,7 @@ function Main {
         Memory
         Networking_Logging
         File_analizing
+        Cracking
         Disk
         Stego_Osint
         Misc
