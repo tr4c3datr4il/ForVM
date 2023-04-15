@@ -10,7 +10,7 @@ function Dependencies {
         sudo apt-get install -y python2.7 python2.7-dev libpython2-dev
         sudo apt-get install -y python3 python3-dev libpython3-dev python3-pip \
                                 python3-setuptools python3-wheel python3.10-venv
-        sudo apt-get install -y libnetfilter-queue-dev libssl-dev libssl3
+        sudo apt-get install -y libnetfilter-queue-dev libssl-dev libssl3 libyara-dev
         sudo apt-get install gnome-terminal -y
         sudo apt-get update && sudo apt-get upgrade -y
 }
