@@ -70,6 +70,9 @@ function File_analizing {
         cd peepdf
         sed -i '1i#!/usr/bin/python2.7' peepdf.py
         cd ~/lab && cp -r peepdf/ /usr/bin
+        cd ~/lab && git clone https://github.com/n0fate/chainbreaker.git && cd chainbreaker/
+        python3 setup.py bdist_wheel -d dist
+        python3 -m pip install -e .
 }
 
 function Misc {
