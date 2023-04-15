@@ -58,6 +58,8 @@ function Networking_Logging {
         cd ~/lab && wget https://github.com/WithSecureLabs/chainsaw/releases/download/v2.5.0/chainsaw_x86_64-unknown-linux-gnu.tar.gz
         gunzip chainsaw_x86_64-unknown-linux-gnu.tar.gz && tar -xf chainsaw_x86_64-unknown-linux-gnu.tar
         cd ~/lab/chainsaw/ && sudo cp chainsaw /usr/bin/chainsaw && sudo chmod +x /usr/bin/chainsaw
+        pip3 install --upgrade pip
+        python3 -m pip install sigma-cli
 }
 
 function File_analizing {
