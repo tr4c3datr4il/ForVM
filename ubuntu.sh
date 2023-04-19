@@ -89,6 +89,7 @@ function Misc {
         cd ~/lab && git clone https://github.com/TheDarkBug/uwufetch.git && cd uwufetch
         make build
         sudo make install
+        sudo apt install dive
 }
 
 function Stego_Osint {
