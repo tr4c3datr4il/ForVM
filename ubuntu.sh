@@ -90,6 +90,7 @@ function Misc {
         make build
         sudo make install
         sudo apt install dive
+        sudo snap install ngrok
 }
 
 function Stego_Osint {
