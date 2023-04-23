@@ -91,6 +91,7 @@ function Misc {
         sudo make install
         sudo apt install dive
         sudo snap install ngrok
+        sudo apt install gdb
 }
 
 function Stego_Osint {
@@ -136,7 +137,8 @@ function Cracking {
 
 function Disk {
         echo -e ${RED}'Installing Autopsy'${CYAN}
-        sudo apt-get install -y autopsy ewf-tools
+        sudo apt-get install -y autopsy ewf-tools testdisk cryptsetup-bin 
+        sudo apt-get install -y libfvde libfvde-dev
 }
 
 function Edit_grub {
