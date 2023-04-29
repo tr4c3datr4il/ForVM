@@ -3,8 +3,8 @@ RED='\033[0;31m'
 CYAN='\033[0;36m'
 
 function Dependencies {
-        sudo apt-get install ca-certificates gnupg lsb-release -y
         sudo apt-get install unzip snapd default-jre curl yara git -y
+        sudo apt-get install ca-certificates gnupg lsb-release -y
         sudo apt-get install -y build-essential libdistorm3-dev libraw1394-11 \
                                 libcapstone-dev capstone-tool tzdata
         sudo apt-get install -y python2.7 python2.7-dev libpython2-dev
@@ -30,6 +30,7 @@ function Memory {
         git clone https://github.com/kudelskisecurity/volatility-gpg.git
         cp ~/lab/volatility-gpg/linux/* ~/.local/lib/python3.10/site-packages/volatility3/framework/plugins/linux/
         git clone https://github.com/volatilityfoundation/volatility.git
+        
         echo -e ${RED}'Installing Memory Extractor tools'${CYAN}
         cd ~/lab && mkdir AVML && cd AVML && wget https://github.com/microsoft/avml/releases/download/v0.11.0/avml
         chmod +x avml
@@ -53,10 +54,10 @@ function Networking_Logging {
         sudo dpkg -i zui_1.0.0_amd64.deb
         wget https://artifacts.elastic.co/downloads/kibana/kibana-8.6.2-linux-x86_64.tar.gz
         wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.6.2-linux-x86_64.tar.gz
-        gunzip  kibana-8.6.2-linux-x86_64.tar.gz && tar -xf kibana-8.6.2-linux-x86_64.tar
-        gunzip elasticsearch-8.6.2-linux-x86_64.tar.gz && tar -xf elasticsearch-8.6.2-linux-x86_64.tar
+        tar -xf kibana-8.6.2-linux-x86_64.tar
+        tar -xf elasticsearch-8.6.2-linux-x86_64.tar
         cd ~/lab && wget https://github.com/WithSecureLabs/chainsaw/releases/download/v2.5.0/chainsaw_x86_64-unknown-linux-gnu.tar.gz
-        gunzip chainsaw_x86_64-unknown-linux-gnu.tar.gz && tar -xf chainsaw_x86_64-unknown-linux-gnu.tar
+        tar -xf chainsaw_x86_64-unknown-linux-gnu.tar
         cd ~/lab/chainsaw/ && sudo cp chainsaw /usr/bin/chainsaw && sudo chmod +x /usr/bin/chainsaw
         pip3 install --upgrade pip
         python3 -m pip install sigma-cli
@@ -67,7 +68,7 @@ function File_analizing {
         sudo -H python3 -m pip install -U oletools[full]
         cd ~/lab
         git clone https://github.com/jesparza/peepdf.git
-        cd peepdf
+        cd peepdf && \
         sed -i '1i#!/usr/bin/python2.7' peepdf.py
         cd ~/lab && cp -r peepdf/ /usr/bin
         cd ~/lab && git clone https://github.com/n0fate/chainbreaker.git && cd chainbreaker/
@@ -105,13 +106,13 @@ function Stego_Osint {
         wget http://www.caesum.com/handbook/Stegsolve.jar -O stegsolve.jar
         chmod +x stegsolve.jar
         git clone https://github.com/p1ngul1n0/blackbird
-        cd blackbird
+        cd blackbird && \
+        sed -i '1i#!/usr/bin/python3' ~/lab/blackbird/blackbird.py
+        sudo cp ~/lab/blackbird/blackbird.py /usr/bin/blackbird.py && sudo chmod +x /usr/bin/blackbird.py
         python3 -m pip install -r requirements.txt
         python3 -m pip install pipx
         pipx ensurepath
         pipx install ghunt
-        sed -i '1i#!/usr/bin/python3' ~/lab/blackbird/blackbird.py
-        sudo cp ~/lab/blackbird/blackbird.py /usr/bin/blackbird.py && sudo chmod +x /usr/bin/blackbird.py
         cd ~/lab
         wget https://mark0.net/download/trid_linux_64.zip && mkdir trid && unzip trid_linux_64.zip -d ./trid
         cd trid && wget https://mark0.net/download/tridupdate.zip && unzip tridupdate.zip
