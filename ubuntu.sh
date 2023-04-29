@@ -23,7 +23,7 @@ function Memory {
         python2.7 -m pip install -U requirements.txt
         sudo ln -s ~/.local/lib/python2.7/site-packages/usr/lib/libyara.so /usr/lib/libyara.so
         python2.7 -m pip install -U git+https://github.com/volatilityfoundation/volatility.git
-        python3 -m pip install -U 
+        python3 -m pip install -U requirements.txt
         python3 -m pip install -U git+https://github.com/volatilityfoundation/volatility3.git
         git clone https://github.com/superponible/volatility-plugins.git
         cp ~/lab/volatility-plugins/* ~/.local/lib/python2.7/site-packages/volatility/plugins/
@@ -45,11 +45,9 @@ function Networking_Logging {
         sudo usermod -a -G wireshark $USER
         sudo apt-get install tshark -y
         git clone https://github.com/mandiant/flare-fakenet-ng.git
-        python2.7 -m pip install requests
         sudo python2.7 -m pip install https://github.com/mandiant/flare-fakenet-ng/zipball/master
         cd ~/lab/flare-fakenet-ng
-        sudo python2.7 setup.py install
-        python3 -m pip install pyshark
+        sudo python2.7 setup.py instal
         cd ~/lab && wget https://github.com/brimdata/zui/releases/download/v1.0.0/zui_1.0.0_amd64.deb -O zui_1.0.0_amd64.deb
         sudo dpkg -i zui_1.0.0_amd64.deb
         wget https://artifacts.elastic.co/downloads/kibana/kibana-8.6.2-linux-x86_64.tar.gz

@@ -13,3 +13,5 @@ jsonschema
 leechcorepyc
 python-snappy
 pwntools
+requests
+pyshark
