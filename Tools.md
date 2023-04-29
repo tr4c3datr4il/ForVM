@@ -40,7 +40,9 @@
 
 ### ***MISC:***
 - Docker CLi
-
+- gdb
+- dive
+- ngrok
 
 
 
