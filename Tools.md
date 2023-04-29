@@ -26,6 +26,7 @@
 ### ***DISK:***
 - Autopsy (Linux version)
 - ewftools
+- testdisk
 
 ### ***CRACKING:***
 - John the ripper
@@ -39,14 +40,7 @@
 
 ### ***MISC:***
 - Docker CLi
-- neofetch
-- lolcat
-- batcat
-- nala
-- bpytop
-- openvpn
-- dos2unix
-- SSH service
+
 
 
 
