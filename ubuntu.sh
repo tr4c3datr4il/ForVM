@@ -192,10 +192,3 @@ function Main {
 }
 
 Main 2>&1 | tee Installation.log
-
-val="$( cat Installation.log | grep -i "error" -C 10)"
-if [[ "$val" ]] ; then 
-        cat Installation.log | grep -i "error -C 10" > Error.log 
-else
-        echo "No error during installation" > Error.log
-fi
