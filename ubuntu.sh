@@ -20,10 +20,10 @@ function Memory {
         curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py
         sudo python2.7 get-pip.py
         sudo python2.7 -m pip install -U setuptools wheel
-        python2.7 -m pip install -U distorm3 yara-python pycryptodome pillow openpyxl ujson pytz ipython capstone construct==2.5.5-reupload
+        python2.7 -m pip install -U requirements.txt
         sudo ln -s ~/.local/lib/python2.7/site-packages/usr/lib/libyara.so /usr/lib/libyara.so
         python2.7 -m pip install -U git+https://github.com/volatilityfoundation/volatility.git
-        python3 -m pip install -U distorm3 pillow openpyxl ujson pytz ipython capstone pefile yara-python pycryptodome jsonschema leechcorepyc python-snappy
+        python3 -m pip install -U 
         python3 -m pip install -U git+https://github.com/volatilityfoundation/volatility3.git
         git clone https://github.com/superponible/volatility-plugins.git
         cp ~/lab/volatility-plugins/* ~/.local/lib/python2.7/site-packages/volatility/plugins/

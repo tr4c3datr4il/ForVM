@@ -1,0 +1,15 @@
+distorm3
+yara-python
+pycryptodome
+pillow
+openpyxl
+ujson
+pytz
+ipython
+capstone
+construct==2.5.5-reupload
+pefile
+jsonschema
+leechcorepyc
+python-snappy
+pwntools
