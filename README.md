@@ -26,7 +26,7 @@
 + Second, change dir to the repo and change the permission of all `.sh` files (or just one depend on your decision).
     
     ```sh
-    cd Setup-Linux
+    cd ForVM
     chmod +x ubuntu.sh
     chmod +x ubuntu-wsl.sh
     ```
