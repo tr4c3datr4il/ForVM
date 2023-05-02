@@ -1,148 +1,235 @@
 #!/bin/bash
 RED='\033[0;31m'
-CYAN='\033[0;36m'
+NORMAL='\033[0m'
+
+
+WORKING_DIR=$(pwd)
+LOG_FILE=$WORKING_DIR"/Installation.log"
+touch $LOG_FILE
+chmod +w $LOG_FILE
+
+function writeToLog {
+    if [ $1 -eq 0 ]; then
+        echo "$(date): $2 installation successful" >> $LOG_FILE
+    else
+        echo "$(date): ERROR - $2 installation failed with exit code $1" >> $LOG_FILE
+    fi
+}
 
 function Dependencies {
-        sudo apt-get install unzip snapd default-jre curl yara git -y
-        sudo apt-get install ca-certificates gnupg lsb-release -y
-        sudo apt-get install -y build-essential libdistorm3-dev libraw1394-11 \
-                                libcapstone-dev capstone-tool tzdata
-        sudo apt-get install -y python2.7 python2.7-dev libpython2-dev
-        sudo apt-get install -y python3 python3-dev libpython3-dev python3-pip \
-                                python3-setuptools python3-wheel python3.10-venv
-        sudo apt-get install -y libnetfilter-queue-dev libssl-dev libssl3 libyara-dev
-        sudo apt-get install gnome-terminal -y
+        APT_PACKAGES=(
+                unzip snapd default-jre curl yara git ca-certificates gnupg lsb-release
+                build-essential libdistorm3-dev libraw1394-11
+                libnetfilter-queue-dev libssl-dev libssl3 libyara-dev
+                libcapstone-dev capstone-tool tzdata
+                python2.7 python2.7-dev libpython2-dev
+                python3 python3-dev libpython3-dev python3-pip
+                python3-setuptools python3-wheel python3.10-venv
+                gnome-terminal
+        )
+        for package in "${APT_PACKAGES[@]}"; do
+                sudo apt install -y $package
+                writeToLog $? "APT - $package"
+        done
         sudo apt-get update && sudo apt-get upgrade -y
 }
 
 function Memory {
-        echo -e ${RED}'Installing Volatility 2 and 3'${CYAN}
+        echo -e ${RED}'Installing Volatility 2 and 3'${NORMAL}
+        sleep 3
         curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py
         sudo python2.7 get-pip.py
         sudo python2.7 -m pip install -U setuptools wheel
-        python2.7 -m pip install -U requirements.txt
+        while read package; do
+                python2.7 -m pip install -U "$package"
+                writeToLog $? "PIP2 - $package"
+        done < requirements.txt
         sudo ln -s ~/.local/lib/python2.7/site-packages/usr/lib/libyara.so /usr/lib/libyara.so
         python2.7 -m pip install -U git+https://github.com/volatilityfoundation/volatility.git
-        python3 -m pip install -U requirements.txt
+        writeToLog $? "Volatility 2"
+        
+        while read package; do
+                python3 -m pip install -U "$package"
+                writeToLog $? "PIP3 - $package"
+        done < requirements.txt
         python3 -m pip install -U git+https://github.com/volatilityfoundation/volatility3.git
+        writeToLog $? "Volatility 3"
+        
         git clone https://github.com/superponible/volatility-plugins.git
         cp ~/lab/volatility-plugins/* ~/.local/lib/python2.7/site-packages/volatility/plugins/
         git clone https://github.com/kudelskisecurity/volatility-gpg.git
         cp ~/lab/volatility-gpg/linux/* ~/.local/lib/python3.10/site-packages/volatility3/framework/plugins/linux/
         git clone https://github.com/volatilityfoundation/volatility.git
         
-        echo -e ${RED}'Installing Memory Extractor tools'${CYAN}
-        cd ~/lab && mkdir AVML && cd AVML && wget https://github.com/microsoft/avml/releases/download/v0.11.0/avml
+        echo -e ${RED}'Installing Memory Extractor tools'${NORMAL}
+        sleep 3
+        cd ~/lab && mkdir AVML && cd AVML && \
+                wget https://github.com/microsoft/avml/releases/download/v0.11.0/avml
         chmod +x avml
-        cd ~/lab && wget https://github.com/504ensicsLabs/LiME/archive/refs/tags/v1.9.1.zip
-        mkdir LiME && cd LiME && unzip LiME-1.9.1.zip 
+        cd ~/lab && mkdir LiME && cd LiME && \
+                wget https://github.com/504ensicsLabs/LiME/archive/refs/tags/v1.9.1.zip
+        unzip LiME-1.9.1.zip 
 }
 
 function Networking_Logging {
-        echo -e ${RED}'Installing Networking and Log/Monitoring tools'${CYAN}
+        echo -e ${RED}'Installing Networking and Log/Monitoring tools'${NORMAL}
+        sleep 3
         echo "wireshark-common wireshark-common/install-setuid boolean true" | sudo debconf-set-selections
         sudo DEBIAN_FRONTEND=noninteractive apt-get -y install wireshark
+        writeToLog $? "APT - wireshark"
         sudo usermod -a -G wireshark $USER
-        sudo apt-get install tshark -y
+        sudo apt-get install -y tshark
+        writeToLog $? "APT - tshark"
+
         git clone https://github.com/mandiant/flare-fakenet-ng.git
         sudo python2.7 -m pip install https://github.com/mandiant/flare-fakenet-ng/zipball/master
         cd ~/lab/flare-fakenet-ng
-        sudo python2.7 setup.py instal
-        cd ~/lab && wget https://github.com/brimdata/zui/releases/download/v1.0.0/zui_1.0.0_amd64.deb -O zui_1.0.0_amd64.deb
+        sudo python2.7 setup.py install
+        cd ~/lab && \
+                wget https://github.com/brimdata/zui/releases/download/v1.0.0/zui_1.0.0_amd64.deb -O zui_1.0.0_amd64.deb
         sudo dpkg -i zui_1.0.0_amd64.deb
+        writeToLog $? "DPKG - Zui"
+
         wget https://artifacts.elastic.co/downloads/kibana/kibana-8.6.2-linux-x86_64.tar.gz
         wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.6.2-linux-x86_64.tar.gz
         tar -xf kibana-8.6.2-linux-x86_64.tar
         tar -xf elasticsearch-8.6.2-linux-x86_64.tar
-        cd ~/lab && wget https://github.com/WithSecureLabs/chainsaw/releases/download/v2.5.0/chainsaw_x86_64-unknown-linux-gnu.tar.gz
+        cd ~/lab && \
+                wget https://github.com/WithSecureLabs/chainsaw/releases/download/v2.5.0/chainsaw_x86_64-unknown-linux-gnu.tar.gz
         tar -xf chainsaw_x86_64-unknown-linux-gnu.tar
-        cd ~/lab/chainsaw/ && sudo cp chainsaw /usr/bin/chainsaw && sudo chmod +x /usr/bin/chainsaw
+        cd ~/lab/chainsaw/ && \
+                sudo cp chainsaw /usr/bin/chainsaw && sudo chmod +x /usr/bin/chainsaw
         pip3 install --upgrade pip
         python3 -m pip install sigma-cli
 }
 
 function File_analizing {
-        echo -e ${RED}'Installing File analizing tools'${CYAN}
+        echo -e ${RED}'Installing File analizing tools'${NORMAL}
+        sleep 3
         sudo -H python3 -m pip install -U oletools[full]
-        cd ~/lab
-        git clone https://github.com/jesparza/peepdf.git
-        cd peepdf && \
-        sed -i '1i#!/usr/bin/python2.7' peepdf.py
-        cd ~/lab && cp -r peepdf/ /usr/bin
-        cd ~/lab && git clone https://github.com/n0fate/chainbreaker.git && cd chainbreaker/
+        writeToLog $? "PIP - oletools"
+        cd ~/lab && \
+                git clone https://github.com/jesparza/peepdf.git
+        cd peepdf/ && \
+                sed -i '1i#!/usr/bin/python2.7' peepdf.py
+        cd ~/lab && \
+                sudo cp -r peepdf/ /usr/bin && sudo chmod +x /usr/bin/peepdf
+}
+
+function OSX {
+        cd ~/lab && \
+                git clone https://github.com/n0fate/chainbreaker.git
+        cd chainbreaker/
         python3 setup.py bdist_wheel -d dist
         python3 -m pip install -e .
 }
 
+function Stego_Osint {
+        echo -e ${RED}'Installing Stego and OSINT tools'${NORMAL}
+        sleep 3
+        cd ~/lab
+        sudo apt-get install -y exiftool steghide
+        sudo gem install zsteg
+        wget https://github.com/RickdeJager/stegseek/releases/download/v0.6/stegseek_0.6-1.deb
+        chmod +x ./stegseek_0.6-1.deb
+        sudo apt-get install -y ./stegseek_0.6-1.deb
+        wget http://www.caesum.com/handbook/Stegsolve.jar -O stegsolve.jar
+        chmod +x stegsolve.jar
+        git clone https://github.com/p1ngul1n0/blackbird
+        cd blackbird && \
+                sed -i '1i#!/usr/bin/python3' ~/lab/blackbird/blackbird.py
+        while read package; do
+                python3 -m pip install -U "$package"
+                writeToLog $? "PIP3 - $package"
+        done < requirements.txt
+        sudo cp ~/lab/blackbird/blackbird.py /usr/bin/blackbird.py && sudo chmod +x /usr/bin/blackbird.py
+        pipx ensurepath
+        pipx install ghunt
+        writeToLog $? "PIPX - ghunt"
+        cd ~/lab && \
+                wget https://mark0.net/download/trid_linux_64.zip && \
+                mkdir trid && \
+                unzip trid_linux_64.zip -d ./trid
+        cd trid && \
+                wget https://mark0.net/download/tridupdate.zip && \
+                unzip tridupdate.zip
+        python3 tridupdate.py
+        sudo cp trid /usr/bin/trid && sudo chmod +x /usr/bin/trid
+        sudo cp *.trd /usr/bin/
+        echo -e "export LANG=/usr/lib/locale/en_US" >> $SHELL_RC_FILE
+        cd ~/lab && \
+                git clone https://github.com/megadose/holehe.git && cd holehe
+        sudo python3 setup.py install
+}
+
+function Cracking {
+        echo -e ${RED}'Installing Cracking tools & Wordlists'${NORMAL}
+        sleep 3
+        sudo apt-get install -y hashcat
+        writeToLog $? "APT - hashcat"
+        sudo snap install john-the-ripper
+        writeToLog $? "SNAP - johntheripper"
+        cd ~/lab && \
+                git clone https://github.com/danielmiessler/SecLists.git && \
+                git clone https://github.com/3ndG4me/KaliLists.git
+        cd KaliLists/
+        gunzip rockyou.txt.gz 
+        echo "alias 'wordlists'='echo ~/lab/KaliLists ~/lab/SecLists'" >> $SHELL_RC_FILE
+        cd ~/lab && \
+                git clone https://github.com/Yara-Rules/rules.git
+}
+
+function Disk {
+        echo -e ${RED}'Installing Disk tools'${NORMAL}
+        sleep 3
+        APT_PACKAGES=(
+                autopsy ewf-tools testdisk cryptsetup-bin
+                libfvde1 libfvde-dev libfvde-utils
+        )
+        for package in "${APT_PACKAGES[@]}"; do
+                sudo apt install -y $package
+                writeToLog $? "APT - $package"
+        done
+}
+
 function Misc {
-        echo -e ${RED}'Installing Docker'${CYAN}
+        echo -e ${RED}'Installing Docker'${NORMAL}
+        sleep 3
         sudo mkdir -p /etc/apt/keyrings
         curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
         echo -e \
         "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
         $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
         sudo apt-get update
-        sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
+        DOCKER_PACKAGES=(docker-ce docker-ce-cli containerd.io docker-compose-plugin)
+        for package in "${DOCKER_PACKAGES[@]}"; do
+                sudo apt install -y $package
+                writeToLog $? "APT - $package"
+        done
         sudo docker pull dominicbreuker/stego-toolkit
         sudo usermod -aG docker $USER
-        cd ~/lab && git clone https://github.com/TheDarkBug/uwufetch.git && cd uwufetch
+        
+        cd ~/lab && \
+                git clone https://github.com/TheDarkBug/uwufetch.git && cd uwufetch
         make build
         sudo make install
-        sudo apt install dive
         sudo snap install ngrok
-        sudo apt install gdb
+        writeToLog $? "SNAP - ngrok"
+        APT_PACKAGES=(
+                dive tree neofetch lolcat bat nala htop 
+                bpytop bison flex dwarfdump openssh-server net-tools 
+                binwalk openvpn dos2unix gdb
+        )
+        for package in "${APT_PACKAGES[@]}"; do
+                sudo apt install -y $package
+                writeToLog $? "APT - $package"
+        done
 }
 
-function Stego_Osint {
-        echo -e ${RED}'Installing Stego and OSINT tools'${CYAN}
-        cd ~/lab
-        sudo apt-get install exiftool steghide -y
-        sudo gem install zsteg
-        wget https://github.com/RickdeJager/stegseek/releases/download/v0.6/stegseek_0.6-1.deb
-        chmod +x ./stegseek_0.6-1.deb
-        sudo apt-get install ./stegseek_0.6-1.deb -y
-        wget http://www.caesum.com/handbook/Stegsolve.jar -O stegsolve.jar
-        chmod +x stegsolve.jar
-        git clone https://github.com/p1ngul1n0/blackbird
-        cd blackbird && \
-        sed -i '1i#!/usr/bin/python3' ~/lab/blackbird/blackbird.py
-        sudo cp ~/lab/blackbird/blackbird.py /usr/bin/blackbird.py && sudo chmod +x /usr/bin/blackbird.py
-        python3 -m pip install -r requirements.txt
-        python3 -m pip install pipx
-        pipx ensurepath
-        pipx install ghunt
-        cd ~/lab
-        wget https://mark0.net/download/trid_linux_64.zip && mkdir trid && unzip trid_linux_64.zip -d ./trid
-        cd trid && wget https://mark0.net/download/tridupdate.zip && unzip tridupdate.zip
-        python3 tridupdate.py
-        sudo cp trid /usr/bin/trid && sudo chmod +x /usr/bin/trid
-        sudo cp *.trd /usr/bin/
-        echo -e "export LANG=/usr/lib/locale/en_US" >> $SHELL_RC_FILE
-        cd ~/lab && git clone https://github.com/megadose/holehe.git && cd holehe
-        sudo python3 setup.py install
-}
-
-function Cracking {
-        echo -e ${RED}'Installing Cracking tools & Wordlists'${CYAN}
-        sudo apt-get install hashcat -y
-        sudo snap install john-the-ripper
-        git clone https://github.com/danielmiessler/SecLists.git
-        git clone https://github.com/3ndG4me/KaliLists.git
-        cd KaliLists/ 
-        gunzip rockyou.txt.gz 
-        echo "alias 'wordlists'='echo ~/lab/KaliLists ~/lab/SecLists'" >> $SHELL_RC_FILE
-        cd ~/lab && git clone https://github.com/Yara-Rules/rules.git
-}
-
-function Disk {
-        echo -e ${RED}'Installing Autopsy'${CYAN}
-        sudo apt-get install -y autopsy ewf-tools testdisk cryptsetup-bin 
-        sudo apt-get install -y libfvde libfvde-dev
-}
-
-function Edit_grub {
+function EditGrub {
         sudo cp /etc/default/grub /etc/default/grub.backup
-        echo 'GRUB_DEFAULT=0
+        echo -e \
+'GRUB_DEFAULT=0
 GRUB_TIMEOUT_STYLE=menu
 GRUB_HIDDEN_TIMEOUT=5
 GRUB_TIMEOUT=10
@@ -166,28 +253,26 @@ function Main {
         Cracking
         Disk
         Stego_Osint
+        OSX
         Misc
-        Edit_grub
+        EditGrub
 
-        echo -e ${RED}'Press ENTER to continue'${CYAN}
-        read a
-                sudo apt-get update
-                sudo apt-get install -y tree neofetch lolcat bat nala htop bpytop bison flex dwarfdump openssh-server net-tools openvpn dos2unix
-                sudo apt-get upgrade -y 
-                sudo apt autoremove
-                echo -e "export PATH=/usr/bin/peepdf:/home/\$USER/.local/bin:\$PATH" >> $SHELL_RC_FILE
-                echo -e ${RED}'Do you want to reboot the system? If not, please do it manually to make sure everything is working fine!'${CYAN}
-                read input
-        until [[ $input == "Y" || $input == "y" || $input == "N" || $input == "n" ]];
+        sudo apt-get update
+        sudo apt-get upgrade -y 
+        sudo apt autoremove
+        echo -e "export PATH=/usr/bin/peepdf:/home/\$USER/.local/bin:\$PATH" >> $SHELL_RC_FILE
+        echo -e ${RED}'Do you want to reboot the system (y/n)? If not, please do it manually to make sure everything is working fine!'${NORMAL}
+        read INPUT
+        until [[ $INPUT == "Y" || $INPUT == "y" || $INPUT == "N" || $INPUT == "n" ]];
         do
-                echo -e ${RED}'Please try again'${CYAN}
-                read input
+                echo -e ${RED}'Please try again!'${NORMAL}
+                read INPUT
         done
-        if [[ $input == "Y" || $input == "y" ]]; then
+        if [[ $INPUT == "Y" || $INPUT == "y" ]]; then
                 sudo reboot -f
         else
-                echo -e ${RED}"Please reboot asap ^_^"${CYAN}
+                echo -e ${RED}"Please reboot asap ^_^"${NORMAL}
         fi
 }
 
-Main 2>&1 | tee Installation.log
+Main
