@@ -67,7 +67,7 @@ function Memory {
                 wget https://github.com/microsoft/avml/releases/download/v0.11.0/avml
         chmod +x avml
         cd ~/lab && mkdir LiME && cd LiME && \
-                wget https://github.com/504ensicsLabs/LiME/archive/refs/tags/v1.9.1.zip
+                wget https://github.com/504ensicsLabs/LiME/archive/refs/tags/v1.9.1.zip -O LiME-1.9.1.zip
         unzip LiME-1.9.1.zip 
 }
 
