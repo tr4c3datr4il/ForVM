@@ -160,7 +160,7 @@ function Stego_Osint {
         sudo sed 's/UTF-8/utf-8/g' /etc/locale.gen | sudo tee /etc/locale.gen
         sudo rm -f /usr/lib/locale/locale-archive
         sudo locale-gen --no-archive en_US.utf8
-        echo -e "export LANG=export LANG=en_US.utf-8" >> $SHELL_RC_FILE
+        echo -e "export LANG=en_US.utf-8" >> $SHELL_RC_FILE
         cd ~/lab && \
                 git clone https://github.com/megadose/holehe.git && cd holehe
         sudo python3 setup.py install
