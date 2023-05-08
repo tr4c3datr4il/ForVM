@@ -19,7 +19,7 @@ function writeToLog {
 function Dependencies {
         APT_PACKAGES=(
                 unzip snapd default-jre curl yara git ca-certificates gnupg lsb-release
-                build-essential libdistorm3-dev libraw1394-11
+                dwarfdump build-essential libdistorm3-dev libraw1394-11
                 libnetfilter-queue-dev libssl-dev libssl3 libyara-dev
                 libcapstone-dev capstone-tool tzdata
                 python2.7 python2.7-dev libpython2-dev
