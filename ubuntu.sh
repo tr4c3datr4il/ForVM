@@ -1,7 +1,7 @@
 #!/bin/bash
 RED='\033[0;31m'
 NORMAL='\033[0m'
-
+GREEN='\033[0;32m'
 
 WORKING_DIR=$(pwd)
 LOG_FILE=$WORKING_DIR"/Installation.log"
@@ -271,6 +271,8 @@ function Main {
 
 Main
 
+echo -e ${GREEN}'Log file located at '$WORKING_DIR${NORMAL}
+sleep 2
 echo -e ${RED}'Do you want to reboot the system (y/n)? If not, please do it manually to make sure everything is working fine!'${NORMAL}
 read INPUT
 until [[ $INPUT == "Y" || $INPUT == "y" || $INPUT == "N" || $INPUT == "n" ]];
