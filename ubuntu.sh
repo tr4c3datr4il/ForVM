@@ -31,7 +31,7 @@ function Dependencies {
                 sudo apt install -y $package
                 writeToLog $? "APT - $package"
         done
-        sudo apt-get update && sudo apt-get upgrade -y
+        sudo apt update && sudo apt upgrade -y
 }
 
 function Memory {
@@ -75,10 +75,10 @@ function Networking_Logging {
         echo -e ${RED}'Installing Networking and Log/Monitoring tools'${NORMAL}
         sleep 3
         echo "wireshark-common wireshark-common/install-setuid boolean true" | sudo debconf-set-selections
-        sudo DEBIAN_FRONTEND=noninteractive apt-get -y install wireshark
+        sudo DEBIAN_FRONTEND=noninteractive apt -y install wireshark
         writeToLog $? "APT - wireshark"
         sudo usermod -a -G wireshark $USER
-        sudo apt-get install -y tshark
+        sudo apt install -y tshark
         writeToLog $? "APT - tshark"
 
         git clone https://github.com/mandiant/flare-fakenet-ng.git
@@ -113,7 +113,7 @@ function File_analizing {
         cd peepdf/ && \
                 sed -i '1i#!/usr/bin/python2.7' peepdf.py
         cd ~/lab && \
-                sudo cp -r peepdf/ /usr/bin && sudo chmod +x /usr/bin/peepdf
+                sudo cp -r peepdf/ /usr/bin && sudo chmod +x /usr/bin/peepdf/peepdf.py
 }
 
 function OSX {
@@ -128,13 +128,14 @@ function Stego_Osint {
         echo -e ${RED}'Installing Stego and OSINT tools'${NORMAL}
         sleep 3
         cd ~/lab
-        sudo apt-get install -y exiftool steghide
+        sudo apt install -y exiftool steghide
         sudo gem install zsteg
         wget https://github.com/RickdeJager/stegseek/releases/download/v0.6/stegseek_0.6-1.deb
         chmod +x ./stegseek_0.6-1.deb
-        sudo apt-get install -y ./stegseek_0.6-1.deb
+        sudo apt install -y ./stegseek_0.6-1.deb
         wget http://www.caesum.com/handbook/Stegsolve.jar -O stegsolve.jar
-        chmod +x stegsolve.jar
+        sudo cp stegsolve.jar /usr/bin/
+        echo -e "alias 'stegsolve'='sudo java -jar /usr/bin/stegsolve.jar'" >> $SHELL_RC_FILE
         git clone https://github.com/p1ngul1n0/blackbird
         cd blackbird && \
                 sed -i '1i#!/usr/bin/python3' ~/lab/blackbird/blackbird.py
@@ -142,7 +143,7 @@ function Stego_Osint {
                 python3 -m pip install -U "$package"
                 writeToLog $? "PIP3 - $package"
         done < requirements.txt
-        sudo cp ~/lab/blackbird/blackbird.py /usr/bin/blackbird.py && sudo chmod +x /usr/bin/blackbird.py
+        sudo cp ~/lab/blackbird/blackbird.py /usr/bin/blackbird && sudo chmod +x /usr/bin/blackbird
         pipx ensurepath
         pipx install ghunt
         writeToLog $? "PIPX - ghunt"
@@ -168,7 +169,7 @@ function Stego_Osint {
 function Cracking {
         echo -e ${RED}'Installing Cracking tools & Wordlists'${NORMAL}
         sleep 3
-        sudo apt-get install -y hashcat
+        sudo apt install -y hashcat
         writeToLog $? "APT - hashcat"
         sudo snap install john-the-ripper
         writeToLog $? "SNAP - johntheripper"
@@ -203,7 +204,7 @@ function Misc {
         echo -e \
         "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
         $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-        sudo apt-get update
+        sudo apt update
         DOCKER_PACKAGES=(docker-ce docker-ce-cli containerd.io docker-compose-plugin)
         for package in "${DOCKER_PACKAGES[@]}"; do
                 sudo apt install -y $package
@@ -244,7 +245,7 @@ GRUB_DISABLE_OS_PROBER=false' | sudo tee /etc/default/grub
 }
 
 function Main {
-        sudo apt-get update && sudo apt-get upgrade -y
+        sudo apt update && sudo apt upgrade -y
         SHELL_RC_FILE="$HOME/.$(echo $SHELL | awk -F '/' '{print $NF}')"rc
         mkdir ~/lab
         cd ~/lab
@@ -260,22 +261,23 @@ function Main {
         Misc
         EditGrub
 
-        sudo apt-get update
-        sudo apt-get upgrade -y 
+        sudo apt update
+        sudo apt upgrade -y 
         sudo apt autoremove
         echo -e "export PATH=/usr/bin/peepdf:/home/\$USER/.local/bin:\$PATH" >> $SHELL_RC_FILE
-        echo -e ${RED}'Do you want to reboot the system (y/n)? If not, please do it manually to make sure everything is working fine!'${NORMAL}
-        read INPUT
-        until [[ $INPUT == "Y" || $INPUT == "y" || $INPUT == "N" || $INPUT == "n" ]];
-        do
-                echo -e ${RED}'Please try again!'${NORMAL}
-                read INPUT
-        done
-        if [[ $INPUT == "Y" || $INPUT == "y" ]]; then
-                sudo reboot -f
-        else
-                echo -e ${RED}"Please reboot asap ^_^"${NORMAL}
-        fi
 }
 
 Main
+
+echo -e ${RED}'Do you want to reboot the system (y/n)? If not, please do it manually to make sure everything is working fine!'${NORMAL}
+read INPUT
+until [[ $INPUT == "Y" || $INPUT == "y" || $INPUT == "N" || $INPUT == "n" ]];
+do
+        echo -e ${RED}'Please try again!'${NORMAL}
+        read INPUT
+done
+if [[ $INPUT == "Y" || $INPUT == "y" ]]; then
+        sudo reboot -f
+else
+        echo -e ${RED}"Please reboot asap ^_^"${NORMAL}
+fi
