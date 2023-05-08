@@ -156,7 +156,10 @@ function Stego_Osint {
         python3 tridupdate.py
         sudo cp trid /usr/bin/trid && sudo chmod +x /usr/bin/trid
         sudo cp *.trd /usr/bin/
-        echo -e "export LANG=/usr/lib/locale/en_US" >> $SHELL_RC_FILE
+        sudo sed 's/UTF-8/utf-8/g' /etc/locale.gen | sudo tee /etc/locale.gen
+        sudo rm -f /usr/lib/locale/locale-archive
+        sudo locale-gen --no-archive en_US.utf8
+        echo -e "export LANG=export LANG=en_US.utf-8" >> $SHELL_RC_FILE
         cd ~/lab && \
                 git clone https://github.com/megadose/holehe.git && cd holehe
         sudo python3 setup.py install
