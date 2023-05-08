@@ -247,6 +247,7 @@ GRUB_DISABLE_OS_PROBER=false' | sudo tee /etc/default/grub
 function Main {
         sudo apt update && sudo apt upgrade -y
         SHELL_RC_FILE="$HOME/.$(echo $SHELL | awk -F '/' '{print $NF}')"rc
+        export LC_TIME=en_US.UTF-8
         mkdir ~/lab
         cd ~/lab
 
@@ -265,6 +266,7 @@ function Main {
         sudo apt upgrade -y 
         sudo apt autoremove
         echo -e "export PATH=/usr/bin/peepdf:/home/\$USER/.local/bin:\$PATH" >> $SHELL_RC_FILE
+        echo -e "export LC_TIME=en_US.utf-8" >> $SHELL_RC_FILE
 }
 
 Main
