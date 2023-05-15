@@ -16,3 +16,5 @@ pwntools
 requests
 pyshark
 pipx
+pyinstaller
+uncompyle6
