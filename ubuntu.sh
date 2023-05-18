@@ -166,6 +166,7 @@ function Stego_Osint {
         cd ~/lab && \
                 git clone https://github.com/megadose/holehe.git && cd holehe
         sudo python3 setup.py install
+        writeToLog $? "PY - Holehe"
 }
 
 function Cracking {
