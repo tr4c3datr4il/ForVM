@@ -82,12 +82,14 @@ function Networking_Logging {
         writeToLog $? "APT - tshark"
 
         git clone https://github.com/mandiant/flare-fakenet-ng.git
-        sudo python2.7 -m pip install https://github.com/mandiant/flare-fakenet-ng/zipball/master
+        sudo python3 -m pip install https://github.com/mandiant/flare-fakenet-ng/zipball/master
+        writeToLog $? "PIP - Fakenet"
         cd ~/lab/flare-fakenet-ng
-        sudo python2.7 setup.py install
+        sudo python3 setup.py install
+        writeToLog $? "PY - Fakenet"
         cd ~/lab && \
-                wget https://github.com/brimdata/zui/releases/download/v1.0.0/zui_1.0.0_amd64.deb -O zui_1.0.0_amd64.deb
-        sudo dpkg -i zui_1.0.0_amd64.deb
+                wget https://github.com/brimdata/zui/releases/download/v1.0.1/zui_1.0.1_amd64.deb -O zui_1.0.1_amd64.deb
+        sudo dpkg -i zui_1.0.1_amd64.deb
         writeToLog $? "DPKG - Zui"
 
         wget https://artifacts.elastic.co/downloads/kibana/kibana-8.6.2-linux-x86_64.tar.gz
