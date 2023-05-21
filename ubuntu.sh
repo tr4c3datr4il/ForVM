@@ -231,6 +231,12 @@ function Misc {
                 sudo apt install -y $package
                 writeToLog $? "APT - $package"
         done
+        cd ~/lab && \
+                git clone https://github.com/pwndbg/pwndbg
+        cd pwndbg && \
+                chmod +x setup.sh
+                ./setup.sh
+                writeToLog $? "pwndbg"
 }
 
 function EditGrub {
