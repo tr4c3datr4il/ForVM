@@ -37,3 +37,13 @@
     ./ubuntu.sh     //if you are in ubuntu virtual machine
     ./ubuntu-wsl.sh     //if you are using WSL on Windows
     ```
+
+### Something you shouldn't miss:
+
++ You can use this command to check if there's any error package while installing: `cat Installation.log | grep -i "ERROR"`. `Installation.log` is located at the folder where you put the install script.
+
++ Tools is listed at `Tools.md` file.
+
++ Open an `Issues` session if you have any problems while installing.
+
++ If you want to contribute to this small project, you can open a pull request.
