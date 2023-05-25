@@ -1,21 +1,17 @@
 # Setup Forensics Environment for Ubuntu VM and WSL
 
-# **ATTENTION!!!**:
-
-## **This script is tested with Ubuntu 22.04.2 and older releases. I'm working on Ubuntu 23.04 now.**
-
 ### **Minimum Requirements for UBUNTU-WSL**
 
 - At least 60GB hard drive (WSL cost me around 2x GB of hard disk)
 - At least 4-8GB RAM
 - Windows Subsystem for Linux version 2
-- Ubuntu Distro 
+- Ubuntu Distro (Tested with 22.04.2)
 
 ### **Minimum Requirements for UBUNTU-VM**
 
 - At least 128GB hard drive (VM)
 - At least 4GB RAM (VM) and 8GB RAM (Host)
-- Ubuntu Distro
+- Ubuntu Distro (Tested with 22.04.2)
 
 **THOSE SCRIPTS ARE FOR FRESH AND CLEAN UBUNTU INSTALLATION ONLY**
 
