@@ -17,16 +17,8 @@ function writeToLog {
     fi
 }
 
-function AptSource {
-        if [[ $DISTRO_VER == "23.04" || $DISTRO_VER > "23.04" ]]; then
-                cat ubuntu22.04.source.list | sudo tee -a /etc/apt/sources.list
-                Dependencies_23
-        else
-                Dependencies_22
-        fi
-}
 
-function Dependencies_23 {
+function Dependencies23 {
         APT_PACKAGES_23=(
                 unzip snapd default-jre curl yara git ca-certificates gnupg lsb-release
                 build-essential libdistorm3-dev libraw1394-11
@@ -36,21 +28,21 @@ function Dependencies_23 {
                 python3-setuptools python3-wheel python3.11-venv
                 gnome-terminal
         )
-        for package in "${APT_PACKAGES[@]}"; do
+        for package in "${APT_PACKAGES_23[@]}"; do
                 sudo apt install -y $package -t lunar
                 writeToLog $? "APT - $package"
         done
         APT_PACKAGES_22=(
                 python2.7 python2.7-dev libpython2-dev
         )
-        for package in "${APT_PACKAGES[@]}"; do
+        for package in "${APT_PACKAGES_22[@]}"; do
                 sudo apt install -y $package -t jammy
                 writeToLog $? "APT - $package"
         done
         sudo apt update && sudo apt upgrade -y
 }
 
-function Dependencies_22 {
+function Dependencies22 {
         APT_PACKAGES=(
                 unzip snapd default-jre curl yara git ca-certificates gnupg lsb-release
                 build-essential libdistorm3-dev libraw1394-11
@@ -68,6 +60,16 @@ function Dependencies_22 {
         sudo apt update && sudo apt upgrade -y
 }
 
+function AptSource {
+        if [[ $DISTRO_VER == "23.04" || $DISTRO_VER > "23.04" ]]; then
+                cat $WORKING_DIR/ubuntu22.04.source.list | sudo tee -a /etc/apt/sources.list
+                sudo apt update && sudo apt upgrade -y
+                Dependencies23
+        else
+                Dependencies22
+        fi
+}
+
 function Memory {
         echo -e ${RED}'Installing Volatility 2 and 3'${NORMAL}
         sleep 3
@@ -77,7 +79,7 @@ function Memory {
         while read package; do
                 python2.7 -m pip install -U "$package"
                 writeToLog $? "PIP2 - $package"
-        done < requirements.txt
+        done < $WORKING_DIR/requirements.txt
         sudo ln -s ~/.local/lib/python2.7/site-packages/usr/lib/libyara.so /usr/lib/libyara.so
         python2.7 -m pip install -U git+https://github.com/volatilityfoundation/volatility.git
         writeToLog $? "Volatility 2"
@@ -85,8 +87,8 @@ function Memory {
         while read package; do
                 python3 -m pip install -U "$package"
                 writeToLog $? "PIP3 - $package"
-        done < requirements.txt
-        python3 -m pip install -U git+https://github.com/volatilityfoundation/volatility3.git
+        done < $WORKING_DIR/requirements.txt
+        python3 -m pip install -U git+https://github.com/volatilityfoundation/volatility3.git --break-system-packages
         writeToLog $? "Volatility 3"
         
         git clone https://github.com/superponible/volatility-plugins.git
@@ -116,7 +118,7 @@ function Networking_Logging {
         writeToLog $? "APT - tshark"
 
         git clone https://github.com/mandiant/flare-fakenet-ng.git
-        sudo python3 -m pip install https://github.com/mandiant/flare-fakenet-ng/zipball/master
+        sudo python3 -m pip install https://github.com/mandiant/flare-fakenet-ng/zipball/master --break-system-packages
         writeToLog $? "PIP - Fakenet"
         cd ~/lab/flare-fakenet-ng
         sudo python3 setup.py install
@@ -139,10 +141,10 @@ function Networking_Logging {
         python3 -m pip install sigma-cli
 }
 
-function File_analizing {
+function FileAnalizing {
         echo -e ${RED}'Installing File analizing tools'${NORMAL}
         sleep 3
-        sudo -H python3 -m pip install -U oletools[full]
+        sudo -H python3 -m pip install -U oletools[full] --break-system-packages
         writeToLog $? "PIP - oletools"
         cd ~/lab && \
                 git clone https://github.com/jesparza/peepdf.git
@@ -180,6 +182,9 @@ function Stego_Osint {
                 writeToLog $? "PIP3 - $package"
         done < requirements.txt
         sudo cp ~/lab/blackbird/blackbird.py /usr/bin/blackbird && sudo chmod +x /usr/bin/blackbird
+        sudo apt install pipx
+        writeToLog $? "APT - PIPX"
+        export PATH="${PATH}:$(python3 -c 'import site; print(site.USER_BASE)')/bin"
         pipx ensurepath
         pipx install ghunt
         writeToLog $? "PIPX - ghunt"
@@ -297,7 +302,7 @@ function Main {
         AptSource
         Memory
         Networking_Logging
-        File_analizing
+        FileAnalizing
         Cracking
         Disk
         Stego_Osint
@@ -314,7 +319,7 @@ function Main {
 
 Main
 
-echo -e ${GREEN}'Log file located at '$WORKING_DIR${NORMAL}
+echo -e ${GREEN}'Log file located at '$(echo $WORKING_DIR)${NORMAL}
 sleep 2
 echo -e ${RED}'Do you want to reboot the system (y/n)? If not, please do it manually to make sure everything is working fine!'${NORMAL}
 read INPUT
