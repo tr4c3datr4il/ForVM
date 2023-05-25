@@ -85,7 +85,7 @@ function Memory {
         writeToLog $? "Volatility 2"
         
         while read package; do
-                python3 -m pip install -U "$package"
+                python3 -m pip install -U "$package" --break-system-packages
                 writeToLog $? "PIP3 - $package"
         done < $WORKING_DIR/requirements.txt
         python3 -m pip install -U git+https://github.com/volatilityfoundation/volatility3.git --break-system-packages
@@ -276,6 +276,10 @@ function Misc {
                 chmod +x setup.sh
                 ./setup.sh
                 writeToLog $? "pwndbg"
+        pip2 --disable-pip-version-check list --outdated --format=json | python2.7 -c "import json, sys; print('\n'.join([x['name'] for x in json.load(sys.stdin)]))"
+        writeToLog $? "UPGRADE-PIP2"
+        pip3 --disable-pip-version-check list --outdated --format=json | python3 -c "import json, sys; print('\n'.join([x['name'] for x in json.load(sys.stdin)]))"
+        writeToLog $? "UPGRADE-PIP3"
 }
 
 function EditGrub {
