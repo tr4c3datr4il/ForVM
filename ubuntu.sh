@@ -5,6 +5,7 @@ GREEN='\033[0;32m'
 
 WORKING_DIR=$(pwd)
 LOG_FILE=$WORKING_DIR"/Installation.log"
+DISTRO_VER=$(lsb_release -rs)
 touch $LOG_FILE
 chmod +w $LOG_FILE
 
@@ -16,7 +17,40 @@ function writeToLog {
     fi
 }
 
-function Dependencies {
+function AptSource {
+        if [[ $DISTRO_VER == "23.04" || $DISTRO_VER > "23.04" ]]; then
+                cat ubuntu22.04.source.list | sudo tee -a /etc/apt/sources.list
+                Dependencies_23
+        else
+                Dependencies_22
+        fi
+}
+
+function Dependencies_23 {
+        APT_PACKAGES_23=(
+                unzip snapd default-jre curl yara git ca-certificates gnupg lsb-release
+                build-essential libdistorm3-dev libraw1394-11
+                libnetfilter-queue-dev libssl-dev libssl3 libyara-dev
+                libcapstone-dev capstone-tool tzdata
+                python3 python3-dev libpython3-dev python3-pip
+                python3-setuptools python3-wheel python3.11-venv
+                gnome-terminal
+        )
+        for package in "${APT_PACKAGES[@]}"; do
+                sudo apt install -y $package -t lunar
+                writeToLog $? "APT - $package"
+        done
+        APT_PACKAGES_22=(
+                python2.7 python2.7-dev libpython2-dev
+        )
+        for package in "${APT_PACKAGES[@]}"; do
+                sudo apt install -y $package -t jammy
+                writeToLog $? "APT - $package"
+        done
+        sudo apt update && sudo apt upgrade -y
+}
+
+function Dependencies_22 {
         APT_PACKAGES=(
                 unzip snapd default-jre curl yara git ca-certificates gnupg lsb-release
                 build-essential libdistorm3-dev libraw1394-11
@@ -260,7 +294,7 @@ function Main {
         mkdir ~/lab
         cd ~/lab
 
-        Dependencies
+        AptSource
         Memory
         Networking_Logging
         File_analizing
