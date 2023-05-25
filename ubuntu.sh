@@ -178,7 +178,7 @@ function Stego_Osint {
         cd blackbird && \
                 sed -i '1i#!/usr/bin/python3' ~/lab/blackbird/blackbird.py
         while read package; do
-                python3 -m pip install -U "$package"
+                python3 -m pip install -U "$package" --break-system-packages
                 writeToLog $? "PIP3 - $package"
         done < requirements.txt
         sudo cp ~/lab/blackbird/blackbird.py /usr/bin/blackbird && sudo chmod +x /usr/bin/blackbird
