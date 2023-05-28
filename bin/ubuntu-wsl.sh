@@ -3,8 +3,9 @@ RED='\033[0;31m'
 NORMAL='\033[0m'
 
 
-WORKING_DIR=$(pwd)
-LOG_FILE=$WORKING_DIR"/Installation.log"
+WORKING_DIR=$1
+LOG_FILE=$WORKING_DIR"/log/Installation.log"
+
 touch $LOG_FILE
 chmod +w $LOG_FILE
 
