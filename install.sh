@@ -7,7 +7,7 @@ WORKING_DIR=$(pwd)
 DISTRO_VER=$(lsb_release -rs)
 
 echo -e ${RED}"Are you using WSL? (y/n)"${NORMAL}
-read INPUT
+read -p 'Input: ' INPUT
 until [[ $INPUT == "Y" || $INPUT == "y" || $INPUT == "N" || $INPUT == "n" ]];
 do
         echo -e ${RED}'Please try again!'${NORMAL}
@@ -23,6 +23,7 @@ else
         sleep 2
         if [[ $DISTRO_VER == "23.04" || $DISTRO_VER > "23.04" ]]; then
                 echo -e ${RED}"Ubuntu 23.04 installation script is unstable and may contains many bugs."${NORMAL}
+                sleep 2
                 chmod +x ./bin/ubuntu23.sh
                 bash ./bin/ubuntu23.sh $WORKING_DIR
         else
