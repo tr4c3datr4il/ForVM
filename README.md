@@ -23,27 +23,25 @@
     git clone https://github.com/1259iknowthat/ForVM.git
     ```
 
-+ Second, change dir to the repo and change the permission of all `.sh` files (or just one depend on your decision).
++ Second, change dir to the repo and change the permission of **install.sh** file.
     
     ```sh
     cd ForVM
-    chmod +x ubuntu.sh
-    chmod +x ubuntu-wsl.sh
+    chmod +x install.sh
     ```
 
-+ Last, run the `.sh` file:
++ Last, run the install file:
     
     ```
-    ./ubuntu.sh     //if you are in ubuntu virtual machine
-    ./ubuntu-wsl.sh     //if you are using WSL on Windows
+    ./install.sh
     ```
 
 ### Something you shouldn't miss:
 
-+ You can use this command to check if there's any error package while installing: `cat Installation.log | grep -i "ERROR"`. `Installation.log` is located at the folder where you put the install script.
++ You can use this command to check if there's any error package while installing: **cat Installation.log | grep -i "ERROR"**. **Installation.log** is located at the folder where you put the install script.
 
 + Tools is listed at `Tools.md` file.
 
 + Open an `Issues` session if you have any problems while installing.
 
-+ If you want to contribute to this small project, you can open a pull request.
++ If you want to contribute to this small project, you can open a `Pull requests`.
