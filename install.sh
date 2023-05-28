@@ -11,7 +11,7 @@ read -p 'Input: ' INPUT
 until [[ $INPUT == "Y" || $INPUT == "y" || $INPUT == "N" || $INPUT == "n" ]];
 do
         echo -e ${RED}'Please try again!'${NORMAL}
-        read INPUT
+        read -p 'Input: ' INPUT
 done
 if [[ $INPUT == "Y" || $INPUT == "y" ]]; then
         echo -e ${GREEN}"Setting up forensics environment with WSL"${NORMAL}
