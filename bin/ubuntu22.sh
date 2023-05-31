@@ -36,6 +36,7 @@ function Dependencies {
 }
 
 function Memory {
+        # Install Volatility 2 and Volatility 3
         echo -e ${RED}'Installing Volatility 2 and 3'${NORMAL}
         sleep 3
         curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py
@@ -56,12 +57,14 @@ function Memory {
         python3 -m pip install -U git+https://github.com/volatilityfoundation/volatility3.git 
         writeToLog $? "Volatility 3"
         
+        # Install Volatility's plugin
         git clone https://github.com/superponible/volatility-plugins.git
         cp ~/lab/volatility-plugins/* ~/.local/lib/python2.7/site-packages/volatility/plugins/
         git clone https://github.com/kudelskisecurity/volatility-gpg.git
         cp ~/lab/volatility-gpg/linux/* ~/.local/lib/python3.10/site-packages/volatility3/framework/plugins/linux/
         git clone https://github.com/volatilityfoundation/volatility.git
         
+        # Install AVML and LiME
         echo -e ${RED}'Installing Memory Extractor tools'${NORMAL}
         sleep 3
         cd ~/lab && mkdir AVML && cd AVML && \
@@ -73,6 +76,7 @@ function Memory {
 }
 
 function Networking_Logging {
+        # Install Wireshark, tshark, Zui and Fakenet
         echo -e ${RED}'Installing Networking and Log/Monitoring tools'${NORMAL}
         sleep 3
         echo "wireshark-common wireshark-common/install-setuid boolean true" | sudo debconf-set-selections
@@ -93,10 +97,13 @@ function Networking_Logging {
         sudo dpkg -i zui_1.0.1_amd64.deb
         writeToLog $? "DPKG - Zui"
 
+        # Install elastic
         wget https://artifacts.elastic.co/downloads/kibana/kibana-8.6.2-linux-x86_64.tar.gz
         wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.6.2-linux-x86_64.tar.gz
         tar -xf kibana-8.6.2-linux-x86_64.tar
         tar -xf elasticsearch-8.6.2-linux-x86_64.tar
+        
+        # Install chainsaw and sigma
         cd ~/lab && \
                 wget https://github.com/WithSecureLabs/chainsaw/releases/download/v2.5.0/chainsaw_x86_64-unknown-linux-gnu.tar.gz
         tar -xf chainsaw_x86_64-unknown-linux-gnu.tar
@@ -107,6 +114,7 @@ function Networking_Logging {
 }
 
 function FileAnalizing {
+        # Install oletools and peepdf
         echo -e ${RED}'Installing File analizing tools'${NORMAL}
         sleep 3
         sudo -H python3 -m pip install -U oletools[full] 
@@ -120,6 +128,7 @@ function FileAnalizing {
 }
 
 function OSX {
+        # Install chainbreaker
         cd ~/lab && \
                 git clone https://github.com/n0fate/chainbreaker.git
         cd chainbreaker/
@@ -128,6 +137,7 @@ function OSX {
 }
 
 function Stego_Osint {
+        # Install steghide, stegseek stegsolve
         echo -e ${RED}'Installing Stego and OSINT tools'${NORMAL}
         sleep 3
         cd ~/lab
@@ -139,6 +149,8 @@ function Stego_Osint {
         wget http://www.caesum.com/handbook/Stegsolve.jar -O stegsolve.jar
         sudo cp stegsolve.jar /usr/bin/
         echo -e "alias 'stegsolve'='sudo java -jar /usr/bin/stegsolve.jar'" >> $SHELL_RC_FILE
+        
+        # Install blackbird, Ghunt, holehe
         git clone https://github.com/p1ngul1n0/blackbird
         cd blackbird && \
                 sed -i '1i#!/usr/bin/python3' ~/lab/blackbird/blackbird.py
@@ -154,6 +166,12 @@ function Stego_Osint {
         pipx install ghunt
         writeToLog $? "PIPX - ghunt"
         cd ~/lab && \
+                git clone https://github.com/megadose/holehe.git && cd holehe
+        sudo python3 setup.py install
+        writeToLog $? "PY - Holehe"
+
+        # Install trid
+        cd ~/lab && \
                 wget https://mark0.net/download/trid_linux_64.zip && \
                 mkdir trid && \
                 unzip trid_linux_64.zip -d ./trid
@@ -167,19 +185,18 @@ function Stego_Osint {
         sudo rm -f /usr/lib/locale/locale-archive
         sudo locale-gen --no-archive en_US.utf8
         echo -e "export LANG=en_US.utf-8" >> $SHELL_RC_FILE
-        cd ~/lab && \
-                git clone https://github.com/megadose/holehe.git && cd holehe
-        sudo python3 setup.py install
-        writeToLog $? "PY - Holehe"
 }
 
 function Cracking {
+        # Install hashcat and johntheripper
         echo -e ${RED}'Installing Cracking tools & Wordlists'${NORMAL}
         sleep 3
         sudo apt install -y hashcat
         writeToLog $? "APT - hashcat"
         sudo snap install john-the-ripper
         writeToLog $? "SNAP - johntheripper"
+        
+        # Get cracking wordlists
         cd ~/lab && \
                 git clone https://github.com/danielmiessler/SecLists.git && \
                 git clone https://github.com/3ndG4me/KaliLists.git
@@ -191,6 +208,7 @@ function Cracking {
 }
 
 function Disk {
+        # Install some disk forensics tools here
         echo -e ${RED}'Installing Disk tools'${NORMAL}
         sleep 3
         APT_PACKAGES=(
@@ -204,6 +222,7 @@ function Disk {
 }
 
 function Misc {
+        # Install docker
         echo -e ${RED}'Installing Docker'${NORMAL}
         sleep 3
         sudo mkdir -p /etc/apt/keyrings
@@ -217,9 +236,12 @@ function Misc {
                 sudo apt install -y $package
                 writeToLog $? "APT - $package"
         done
-        sudo docker pull dominicbreuker/stego-toolkit
         sudo usermod -aG docker $USER
+
+        # Pull stego toolkit
+        sudo docker pull dominicbreuker/stego-toolkit
         
+        # Install something funny
         cd ~/lab && \
                 git clone https://github.com/TheDarkBug/uwufetch.git && cd uwufetch
         make build
@@ -235,12 +257,16 @@ function Misc {
                 sudo apt install -y $package
                 writeToLog $? "APT - $package"
         done
+
+        # Install pwndbg
         cd ~/lab && \
                 git clone https://github.com/pwndbg/pwndbg
         cd pwndbg && \
                 chmod +x setup.sh
                 ./setup.sh
                 writeToLog $? "pwndbg"
+
+        # Upgrade PIP packages
         pip2 --disable-pip-version-check list --outdated --format=json | python2.7 -c "import json, sys; print('\n'.join([x['name'] for x in json.load(sys.stdin)]))"
         writeToLog $? "UPGRADE-PIP2"
         pip3 --disable-pip-version-check list --outdated --format=json | python3 -c "import json, sys; print('\n'.join([x['name'] for x in json.load(sys.stdin)]))"
