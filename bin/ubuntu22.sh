@@ -181,7 +181,8 @@ function Stego_Osint {
         python3 tridupdate.py
         sudo cp trid /usr/bin/trid && sudo chmod +x /usr/bin/trid
         sudo cp *.trd /usr/bin/
-        sudo sed 's/UTF-8/utf-8/g' /etc/locale.gen | sudo tee /etc/locale.gen
+        sudo sed 's/UTF-8/utf-8/g' /etc/locale.gen > ~/locale.gen
+        sudo cp ~/locale.gen /etc/locale.gen
         sudo rm -f /usr/lib/locale/locale-archive
         sudo locale-gen --no-archive en_US.utf8
         echo -e "export LANG=en_US.utf-8" >> $SHELL_RC_FILE
@@ -310,6 +311,7 @@ function Main {
         sudo apt autoremove
         echo -e "export PATH=/usr/bin/peepdf:/home/\$USER/.local/bin:\$PATH" >> $SHELL_RC_FILE
         echo -e "export LC_TIME=en_US.utf-8" >> $SHELL_RC_FILE
+        echo -e "export LC_ALL=en_US.UTF-8" >> $SHELL_RC_FILE
 }
 
 Main
