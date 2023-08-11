@@ -247,10 +247,15 @@ function Misc {
                 git clone https://github.com/TheDarkBug/uwufetch.git && cd uwufetch
         make build
         sudo make install
-        sudo snap install ngrok
-        writeToLog $? "SNAP - ngrok"
+        SNAP_PACKAGES=(
+                ngrok dive pycdc pyinstxtractor
+        )
+        for package in "${APT_PACKAGES[@]}"; do
+                sudo snap install $package
+                writeToLog $? "SNAP - $package"
+        done
         APT_PACKAGES=(
-                dive tree neofetch lolcat bat nala htop 
+                tree neofetch lolcat bat nala htop 
                 bpytop bison flex dwarfdump openssh-server net-tools 
                 binwalk openvpn dos2unix gdb
         )
