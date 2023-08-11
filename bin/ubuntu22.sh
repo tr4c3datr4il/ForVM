@@ -257,7 +257,7 @@ function Misc {
         APT_PACKAGES=(
                 tree neofetch lolcat bat nala htop 
                 bpytop bison flex dwarfdump openssh-server net-tools 
-                binwalk openvpn dos2unix gdb
+                binwalk openvpn dos2unix gdb ltrace
         )
         for package in "${APT_PACKAGES[@]}"; do
                 sudo apt install -y $package
