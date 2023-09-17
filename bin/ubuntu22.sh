@@ -186,6 +186,7 @@ function Stego_Osint {
         sudo rm -f /usr/lib/locale/locale-archive
         sudo locale-gen --no-archive en_US.utf8
         echo -e "export LANG=en_US.utf-8" >> $SHELL_RC_FILE
+        sudo rm ~/locale.gen
 }
 
 function Cracking {
@@ -277,6 +278,21 @@ function Misc {
         writeToLog $? "UPGRADE-PIP2"
         pip3 --disable-pip-version-check list --outdated --format=json | python3 -c "import json, sys; print('\n'.join([x['name'] for x in json.load(sys.stdin)]))"
         writeToLog $? "UPGRADE-PIP3"
+
+        #Install ZSH
+        sudo apt install zsh
+        writeToLog $? "INSTALLED ZSH"
+        chsh -s $(which zsh)
+        writeToLog $? "SET ZSH AS DEFAULT"
+
+        #Install oh-my-zsh
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+        writeToLog $? "DOWNLOAD AND INSTALL OH-MY-ZSH"
+        curl https://gist.githubusercontent.com/PkNova76/6823ebad7e7d246a4bb0a0d7e0f7ca60/raw/e477aee406ea64013acfe64263a515980dfa25ae/pknova.zsh-theme -o ~/.oh-my-zsh/themes/pknova.zsh-theme
+        writeToLog $? "DOWNLOAD My Theme"
+        sed -i "/^ZSH_THEME=/cZSH_THEME=\"pknova\"" ~/.zshrc
+        writeToLog $? "SET MY THEME"
+        sed -i "/^plugins=/cplugins=(git aliases colorize colored-man-pages copypath encode64)" ~/.zshrc
 }
 
 function EditGrub {
