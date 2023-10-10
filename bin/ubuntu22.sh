@@ -45,7 +45,7 @@ function Memory {
         while read package; do
                 python2.7 -m pip install -U "$package"
                 writeToLog $? "PIP2 - $package"
-        done < $WORKING_DIR/config/requirements.txt
+        done < $WORKING_DIR/config/requirements2.txt
         sudo ln -s ~/.local/lib/python2.7/site-packages/usr/lib/libyara.so /usr/lib/libyara.so
         python2.7 -m pip install -U git+https://github.com/volatilityfoundation/volatility.git
         writeToLog $? "Volatility 2"
@@ -53,7 +53,7 @@ function Memory {
         while read package; do
                 python3 -m pip install -U "$package" 
                 writeToLog $? "PIP3 - $package"
-        done < $WORKING_DIR/config/requirements.txt
+        done < $WORKING_DIR/config/requirements3.txt
         python3 -m pip install -U git+https://github.com/volatilityfoundation/volatility3.git 
         writeToLog $? "Volatility 3"
         
@@ -68,7 +68,7 @@ function Memory {
         echo -e ${RED}'Installing Memory Extractor tools'${NORMAL}
         sleep 3
         cd ~/lab && mkdir AVML && cd AVML && \
-                wget https://github.com/microsoft/avml/releases/download/v0.11.0/avml
+                wget https://github.com/microsoft/avml/releases/download/v0.13.0/avml
         chmod +x avml
         cd ~/lab && mkdir LiME && cd LiME && \
                 wget https://github.com/504ensicsLabs/LiME/archive/refs/tags/v1.9.1.zip -O LiME-1.9.1.zip
@@ -93,8 +93,8 @@ function Networking_Logging {
         sudo python3 setup.py install
         writeToLog $? "PY - Fakenet"
         cd ~/lab && \
-                wget https://github.com/brimdata/zui/releases/download/v1.0.1/zui_1.0.1_amd64.deb -O zui_1.0.1_amd64.deb
-        sudo dpkg -i zui_1.0.1_amd64.deb
+                wget https://github.com/brimdata/zui/releases/download/v1.3.0/zui_1.3.0_amd64.deb -O zui_1.3.0_amd64.deb
+        sudo dpkg -i zui_1.3.0_amd64.deb
         writeToLog $? "DPKG - Zui"
 
         # Install elastic
@@ -105,7 +105,7 @@ function Networking_Logging {
         
         # Install chainsaw and sigma
         cd ~/lab && \
-                wget https://github.com/WithSecureLabs/chainsaw/releases/download/v2.5.0/chainsaw_x86_64-unknown-linux-gnu.tar.gz
+                wget https://github.com/WithSecureLabs/chainsaw/releases/download/v2.7.3/chainsaw_x86_64-unknown-linux-gnu.tar.gz
         tar -xf chainsaw_x86_64-unknown-linux-gnu.tar
         cd ~/lab/chainsaw/ && \
                 sudo cp chainsaw /usr/bin/chainsaw && sudo chmod +x /usr/bin/chainsaw
@@ -125,15 +125,6 @@ function FileAnalizing {
                 sed -i '1i#!/usr/bin/python2.7' peepdf.py
         cd ~/lab && \
                 sudo cp -r peepdf/ /usr/bin && sudo chmod +x /usr/bin/peepdf/peepdf.py
-}
-
-function OSX {
-        # Install chainbreaker
-        cd ~/lab && \
-                git clone https://github.com/n0fate/chainbreaker.git
-        cd chainbreaker/
-        python3 setup.py bdist_wheel -d dist
-        python3 -m pip install -e .
 }
 
 function Stego_Osint {
@@ -198,6 +189,13 @@ function Cracking {
         sudo snap install john-the-ripper
         writeToLog $? "SNAP - johntheripper"
         
+        # Install chainbreaker
+        cd ~/lab && \
+                git clone https://github.com/n0fate/chainbreaker.git
+        cd chainbreaker/
+        python3 setup.py bdist_wheel -d dist
+        python3 -m pip install -e .
+
         # Get cracking wordlists
         cd ~/lab && \
                 git clone https://github.com/danielmiessler/SecLists.git && \
@@ -323,7 +321,6 @@ function Main {
         Cracking
         Disk
         Stego_Osint
-        OSX
         Misc
         EditGrub
 
@@ -333,6 +330,7 @@ function Main {
         echo -e "export PATH=/usr/bin/peepdf:/home/\$USER/.local/bin:\$PATH" >> $SHELL_RC_FILE
         echo -e "export LC_TIME=en_US.utf-8" >> $SHELL_RC_FILE
         echo -e "export LC_ALL=en_US.UTF-8" >> $SHELL_RC_FILE
+        echo -e "export LC_ALL=C" >> $SHELL_RC_FILE
 }
 
 Main
