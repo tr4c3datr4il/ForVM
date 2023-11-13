@@ -11,9 +11,9 @@ chmod +w $LOG_FILE
 
 function writeToLog {
     if [ $1 -eq 0 ]; then
-        echo "$(date): $2 installation successful" >> $LOG_FILE
+        printf "%s: %s installation successful\n" "$(date)" "$2" >> "$LOG_FILE"
     else
-        echo "$(date): ERROR - $2 installation failed with exit code $1" >> $LOG_FILE
+        printf "%s: ERROR - %s installation failed with exit code %d\n" "$(date)" "$2" "$1" >> "$LOG_FILE"
     fi
 }
 
@@ -26,7 +26,7 @@ function Dependencies {
                 python2.7 python2.7-dev libpython2-dev
                 python3 python3-dev libpython3-dev python3-pip
                 python3-setuptools python3-wheel python3.10-venv
-                gnome-terminal
+                gnome-terminal cargo
         )
         for package in "${APT_PACKAGES[@]}"; do
                 sudo apt install -y $package
@@ -39,6 +39,7 @@ function Memory {
         # Install Volatility 2 and Volatility 3
         echo -e ${RED}'Installing Volatility 2 and 3'${NORMAL}
         sleep 3
+
         curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py
         sudo python2.7 get-pip.py
         sudo python2.7 -m pip install -U setuptools wheel
@@ -67,6 +68,7 @@ function Memory {
         # Install AVML and LiME
         echo -e ${RED}'Installing Memory Extractor tools'${NORMAL}
         sleep 3
+
         cd ~/lab && mkdir AVML && cd AVML && \
                 wget https://github.com/microsoft/avml/releases/download/v0.13.0/avml
         chmod +x avml
@@ -79,6 +81,7 @@ function Networking_Logging {
         # Install Wireshark, tshark, Zui and Fakenet
         echo -e ${RED}'Installing Networking and Log/Monitoring tools'${NORMAL}
         sleep 3
+
         echo "wireshark-common wireshark-common/install-setuid boolean true" | sudo debconf-set-selections
         sudo DEBIAN_FRONTEND=noninteractive apt -y install wireshark
         writeToLog $? "APT - wireshark"
@@ -86,26 +89,27 @@ function Networking_Logging {
         sudo apt install -y tshark
         writeToLog $? "APT - tshark"
 
-        git clone https://github.com/mandiant/flare-fakenet-ng.git
+        cd ~/lab && \
+                git clone https://github.com/mandiant/flare-fakenet-ng.git
         sudo python3 -m pip install https://github.com/mandiant/flare-fakenet-ng/zipball/master 
         writeToLog $? "PIP - Fakenet"
         cd ~/lab/flare-fakenet-ng
         sudo python3 setup.py install
         writeToLog $? "PY - Fakenet"
         cd ~/lab && \
-                wget https://github.com/brimdata/zui/releases/download/v1.3.0/zui_1.3.0_amd64.deb -O zui_1.3.0_amd64.deb
-        sudo dpkg -i zui_1.3.0_amd64.deb
+                wget https://github.com/brimdata/zui/releases/download/v1.4.1/zui_1.4.1_amd64.deb -O zui_1.4.1_amd64.deb
+        sudo dpkg -i zui_1.4.1_amd64.deb
         writeToLog $? "DPKG - Zui"
 
         # Install elastic
-        wget https://artifacts.elastic.co/downloads/kibana/kibana-8.6.2-linux-x86_64.tar.gz
-        wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.6.2-linux-x86_64.tar.gz
-        tar -xf kibana-8.6.2-linux-x86_64.tar
-        tar -xf elasticsearch-8.6.2-linux-x86_64.tar
+        wget https://artifacts.elastic.co/downloads/kibana/kibana-8.11.0-linux-x86_64.tar.gz
+        wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.11.0-linux-x86_64.tar.gz
+        tar -xf kibana-8.11.0-linux-x86_64.tar
+        tar -xf elasticsearch-8.11.0-linux-x86_64.tar
         
         # Install chainsaw and sigma
         cd ~/lab && \
-                wget https://github.com/WithSecureLabs/chainsaw/releases/download/v2.7.3/chainsaw_x86_64-unknown-linux-gnu.tar.gz
+                wget https://github.com/WithSecureLabs/chainsaw/releases/download/v2.8.0/chainsaw_x86_64-unknown-linux-gnu.tar.gz
         tar -xf chainsaw_x86_64-unknown-linux-gnu.tar
         cd ~/lab/chainsaw/ && \
                 sudo cp chainsaw /usr/bin/chainsaw && sudo chmod +x /usr/bin/chainsaw
@@ -117,20 +121,20 @@ function FileAnalizing {
         # Install oletools and peepdf
         echo -e ${RED}'Installing File analizing tools'${NORMAL}
         sleep 3
+
         sudo -H python3 -m pip install -U oletools[full] 
         writeToLog $? "PIP - oletools"
         cd ~/lab && \
                 git clone https://github.com/jesparza/peepdf.git
         cd peepdf/ && \
                 sed -i '1i#!/usr/bin/python2.7' peepdf.py
-        cd ~/lab && \
-                sudo cp -r peepdf/ /usr/bin && sudo chmod +x /usr/bin/peepdf/peepdf.py
 }
 
 function Stego_Osint {
         # Install steghide, stegseek stegsolve
         echo -e ${RED}'Installing Stego and OSINT tools'${NORMAL}
         sleep 3
+
         cd ~/lab
         sudo apt install -y exiftool steghide
         sudo gem install zsteg
@@ -183,6 +187,7 @@ function Cracking {
         # Install hashcat and johntheripper
         echo -e ${RED}'Installing Cracking tools & Wordlists'${NORMAL}
         sleep 3
+
         sudo apt install -y hashcat
         writeToLog $? "APT - hashcat"
         sudo snap install john-the-ripper
@@ -210,6 +215,7 @@ function Disk {
         # Install some disk forensics tools here
         echo -e ${RED}'Installing Disk tools'${NORMAL}
         sleep 3
+
         APT_PACKAGES=(
                 autopsy ewf-tools testdisk cryptsetup-bin
                 libfvde1 libfvde-dev libfvde-utils
@@ -224,6 +230,7 @@ function Misc {
         # Install docker
         echo -e ${RED}'Installing Docker'${NORMAL}
         sleep 3
+        
         sudo mkdir -p /etc/apt/keyrings
         curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
         echo -e \
