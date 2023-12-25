@@ -20,7 +20,7 @@
 + First, clone this repository to your local lab
     
     ```sh
-    git clone https://github.com/1259iknowthat/ForVM.git
+    git clone https://github.com/tr4c3datr4il/ForVM.git
     ```
 
 + Second, change dir to the repo and change the permission of **install.sh** file.
