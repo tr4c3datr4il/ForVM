@@ -292,7 +292,12 @@ function Misc {
         writeToLog $? "DOWNLOAD My Theme"
         sed -i "/^ZSH_THEME=/cZSH_THEME=\"pknova\"" ~/.zshrc
         writeToLog $? "SET MY THEME"
-        sed -i "/^plugins=/cplugins=(git aliases colorize colored-man-pages copypath encode64)" ~/.zshrc
+
+        #Install zsh plugins
+        git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
+        git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
+
+        sed -i "/^plugins=/cplugins=(git aliases colorize colored-man-pages copypath encode64 zoxide zsh-autosuggestions zsh-syntax-highlighting)" ~/.zshrc
 }
 
 function EditGrub {
@@ -300,7 +305,7 @@ function EditGrub {
         echo -e \
 'GRUB_DEFAULT=0
 GRUB_TIMEOUT_STYLE=menu
-GRUB_HIDDEN_TIMEOUT=5
+GRUB_HIDDEN_TIMEOUT=0
 GRUB_TIMEOUT=10
 GRUB_DISTRIBUTOR=`lsb_release -i -s 2> /dev/null || echo Debian`
 GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"
@@ -309,13 +314,35 @@ GRUB_DISABLE_OS_PROBER=false' | sudo tee /etc/default/grub
         sudo update-grub 
 }
 
-function Main {
-        sudo apt update && sudo apt upgrade -y
-        SHELL_RC_FILE="$HOME/.$(echo $SHELL | awk -F '/' '{print $NF}')"rc
-        export LC_TIME=en_US.UTF-8
-        mkdir ~/lab
-        cd ~/lab
+function prompt_reinstall {
+        services=("Memory" "Networking Logging" "File Analyzing" "Cracking" "Disk" "Stego Osint" "OSX" "Misc")
 
+        echo "0) Reinstall All"
+        for i in "${!services[@]}"; do
+                echo "$((i+1))) ${services[i]}"
+        done
+        echo "Choose which service to reinstall (e.g., 1, 2, 3):"
+        read -p "Enter your choices: " user_choices
+        # Splitting the user input into an array
+        IFS=', ' read -r -a choices <<< "$user_choices"
+
+        # Loop through each choice and call the corresponding function
+        if [[ " ${selected_choices[@]} " =~ " 0 " ]]; then
+                echo -e ${GREEN}"REINSTALLING EVERYTHING"
+                install_all
+        else
+                for choice in "${choices[@]}"; do
+                        if (( choice >= 1 && choice <= ${#services[@]} )); then
+                                ${services[$((choice-1))]}
+                                echo "Installing ${services[$((choice-1))]}"
+                        else
+                                echo "Invalid choice: $choice"
+                        fi
+                done
+        fi
+}
+
+function install_all {
         Dependencies
         Memory
         Networking_Logging
@@ -333,6 +360,34 @@ function Main {
         echo -e "export PATH=/usr/bin/peepdf:/home/\$USER/.local/bin:\$PATH" >> $SHELL_RC_FILE
         echo -e "export LC_TIME=en_US.utf-8" >> $SHELL_RC_FILE
         echo -e "export LC_ALL=en_US.UTF-8" >> $SHELL_RC_FILE
+
+        echo -e "FINISHED"
+}
+
+function Main {
+        MARKER_FILE="$HOME/.setup_linux_marker"
+
+        if [ -f "$MARKER_FILE" ]; then
+                echo -e ${RED}"The script has already been run."
+                read -p "Do you want to reinstall the tools? (y/n): " choice
+
+        if [[ $choice == "y" || $choice == "Y" ]]; then
+                prompt_reinstall
+                exit 0
+        else
+                echo "Reinstallation cancelled."
+                exit 0
+        fi
+        else
+                sudo apt update && sudo apt upgrade -y
+                SHELL_RC_FILE="$HOME/.$(echo $SHELL | awk -F '/' '{print $NF}')"rc
+                export LC_TIME=en_US.UTF-8
+                mkdir ~/lab
+                cd ~/lab
+                # This is the first run, so create the marker file and install
+                touch "$MARKER_FILE"
+                install_all
+        fi
 }
 
 Main
